@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>PROTOTYPE</title>
+</head>
+<body>
+  <h1>Speech Recognition Demo</h1>
+	<textarea id="textarea" rows = 10 cols = 80></textarea>
+	<button id="button" onclick="recognition.start()">Click to start</button>
+ 
+	<script type="text/javascript">
+		if(!('webkitSpeechRecognition' in window)){
+			upgrade();
+		}else{
+			//Recognition Variable
+			var recognizing = false;
+			var recognition = new webkitSpeechRecognition();
+			var final_transcript = '';
+			recognition.continuous = true;
+			recognition.interimResults = true;
+			recognition.lang = "en-US";
+			//On Start
+			recognition.onstart = function(){
+				recognizing = true;
+			}
+			
+			//On End
+			recognition.onend = function(){
+				recognizing = false;
+			}
+			
+			//On Result
+			recognition.onresult = function(event){
+				var interim_transcript = '';
+				for(var i = event.resultIndex; i < event.results.length; ++i){
+					if(event.results[i].isFinal){
+						final_transcript += event.results[i][0].transcript;
+						if(event.results[i][0].transcript == "hello"){
+							alert("OOPS!");
+						}
+					}else{
+						interim_transcript += event.results[i][0].transcript;
+					}
+				}
+				textarea.innerHTML = final_transcript;
+			}
+		}
+	</script>
+<body>
+</html>
