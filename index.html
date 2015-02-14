@@ -1,27 +1,46 @@
 <!DOCTYPE html>
 <html>
+
 <head>
+	<!--Title-->
 	<title>Lapsus Linguae</title>
+	
+	<!--CSS-->
+	<link rel="stylesheet" type="text/css" href="stylesheet.css">
 </head>
+
 <body>
+
+	<!--Navigation Bar-->
 	<nav>
 		<ul>
-			<li><h1>Lapsus Linguae</h1></li>
+			<li>Lapsus Linguae</li>
+			<li>About</li>
 			<li>
 				<input type="search" name="query">
 				<input type="submit" value="Search">
 			</li>
-			<li></li>
+			<li>My Account</li>
 		</ul>
 	</nav>
-  <h1>Speech Recognition Demo</h1>
-	<textarea id="textarea" rows = 10 cols = 80></textarea>
-	<button id="button" onclick="recognition.start()">Click to start</button>
+	
+	<!--Speech Recognition-->
+	<div id="speech">
+		<h1>Welcome!</h1>
+		<textarea id="textarea" rows = 10 cols = 80></textarea>
+		<button id="button" onclick="recognition.start()">Click to start</button>
+	</div>
+	
+	<!--Footer-->
+	<footer>
+		<p>Created by RCOS and DFA</p>
+	</footer>
 	
 	<!--Move to seperate file-->
 	<script type="text/javascript">
-		if(!('webkitSpeechRecognition' in window)){
-			upgrade();
+		if(!('webkitSpeechRecognition' in window)){	
+			//If Not on Webkit
+			alert("Your browser does not support voice recognition!");
 		}else{
 			//Recognition Variable
 			var recognizing = false;
@@ -57,5 +76,6 @@
 			}
 		}
 	</script>
+	
 <body>
 </html>
