@@ -82,7 +82,7 @@ if(!('webkitSpeechRecognition' in window)){
 //Variables
 var two_line = /\n\n/g;
 var one_line = /\n/g;
-var first_char = /\s/g;
+var first_char = /\S/;
 
 //Upgrade
 function upgrade(){
