@@ -27,7 +27,11 @@
 	<!--Speech Recognition-->
 	<div id="speech">
 		<h1>Welcome!</h1>
-		<textarea id="textarea" rows = 10 cols = 80></textarea>
+		<div id="results">
+			<span id="final_span" class="final"></span>
+			<span id="interim_span" class="interim"></span>
+		</div>
+		<!--<textarea id="textarea" rows = 10 cols = 80></textarea>-->
 		<button id="button" onclick="recognition.start()">Click to start</button>
 	</div>
 	
@@ -37,45 +41,7 @@
 	</footer>
 	
 	<!--Move to seperate file-->
-	<script type="text/javascript">
-		if(!('webkitSpeechRecognition' in window)){	
-			//If Not on Webkit
-			alert("Your browser does not support voice recognition!");
-		}else{
-			//Recognition Variable
-			var recognizing = false;
-			var recognition = new webkitSpeechRecognition();
-			var final_transcript = '';
-			recognition.continuous = true;
-			recognition.interimResults = true;
-			recognition.lang = "en-US";
-			//On Start
-			recognition.onstart = function(){
-				recognizing = true;
-			}
-			
-			//On End
-			recognition.onend = function(){
-				recognizing = false;
-			}
-			
-			//On Result
-			recognition.onresult = function(event){
-				var interim_transcript = '';
-				for(var i = event.resultIndex; i < event.results.length; ++i){
-					if(event.results[i].isFinal){
-						final_transcript += event.results[i][0].transcript;
-						if(event.results[i][0].transcript == "hello"){
-							alert("OOPS!");
-						}
-					}else{
-						interim_transcript += event.results[i][0].transcript;
-					}
-				}
-				textarea.innerHTML = final_transcript;
-			}
-		}
-	</script>
+	<script type="text/javascript" src="speech.js"></script>
 	
 <body>
 </html>
