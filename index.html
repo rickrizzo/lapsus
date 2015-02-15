@@ -7,26 +7,34 @@
 	
 	<!--CSS-->
 	<link rel="stylesheet" type="text/css" href="stylesheet.css">
+    <link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
 </head>
 
 <body>
+        <!--Navigation Bar-->
+        <nav>
+            <ul>
+                <li><a href="index.html">Lapsus Linguae</a></li>
+                <li>
+                    Practice
+                    <ul>
+                        <li>Your Speech</li>
+                        <li>Tongue Twisters</li>
+                        <li>Filler Words</li>
+                    </ul>
+                </li>
+                <li>About</li>
+                <li>My Account</li>
+            </ul>
+        </nav>
 
-	<!--Navigation Bar-->
-	<nav>
-		<ul>
-			<li>Lapsus Linguae</li>
-			<li>About</li>
-			<li>
-				<input type="search" name="query">
-				<input type="submit" value="Search">
-			</li>
-			<li>My Account</li>
-		</ul>
-	</nav>
+        <!--Header-->
+    <header>
+        <h1>Welcome!</h1>
+    </header>
 	
 	<!--Speech Recognition-->
 	<div id="speech">
-		<h1>Welcome!</h1>
 		<div id="results">
 			<span id="final_span" class="final"></span>
 			<span id="interim_span" class="interim"></span>
@@ -40,8 +48,8 @@
 		<p>Created by RCOS and DFA</p>
 	</footer>
 	
-	<!--Move to seperate file-->
+	<!--Scripts-->
 	<script type="text/javascript" src="speech.js"></script>
-	
-<body>
+</body>
+
 </html>

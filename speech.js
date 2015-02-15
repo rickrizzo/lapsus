@@ -61,13 +61,13 @@ if(!('webkitSpeechRecognition' in window)){
 		//Interim Text
 		var interim_transcript = '';
 		for(var i = event.resultIndex; i < event.results.length; ++i){
+			var transcript = event.results[i][0].transcript;
 		    if (event.results[i].isFinal) {
 		        //Check for Filler Words
-		        var transcript = filler(event.results[i][0].transcript);
-			    final_transcript += transcript;
+			    final_transcript += filler(transcript);
 		    } else {
                 /*Create function to increase um recognition confidence*/
-				interim_transcript += event.results[i][0].transcript;
+				interim_transcript += transcript;
 			}
 		}
 		
@@ -99,7 +99,7 @@ function linebreak(s){
 
 //Capitalize
 function capitalize(s){
-	return s.replace(first_char, function(m){return m.toUpperCase();});
+	return s.replace(first_char, function(m){return m.toUpperCase();})	;
 }
 
 //Filler Words
