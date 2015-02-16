@@ -22,6 +22,7 @@ if(!('webkitSpeechRecognition' in window)){
 	//On Start
 	recognition.onstart = function(){
 		recognizing = true;
+		//startstoptoggle();
 	};
 	
 	//On Error
@@ -43,6 +44,7 @@ if(!('webkitSpeechRecognition' in window)){
 	//On End
 	recognition.onend = function(){
 		recognizing = false;
+		//startstoptoggle();
 		if(ignore_onend){
 			return;
 		}
@@ -89,7 +91,7 @@ var first_char = /\S/;
 
 //Upgrade
 function upgrade(){
-	alert("Please upgrade your browser!");
+	alert("Please upgrade your browser! (Try Switching to Chrome");
 }
 
 //Linebreak
@@ -114,3 +116,15 @@ function filler(s) {
         return s;
     }
 }
+
+//Button Text Change WIP
+/*
+function startstoptoggle(){
+	//alert("Button Text Change called!");
+	var buttonelem = document.getElementById("button");
+	if (buttonelem.value == "Click to Start")
+			buttomelem.value = "Click to Stop";
+	else
+		buttonelem.value = "Click to Start";
+}
+*/
