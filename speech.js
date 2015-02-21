@@ -2,6 +2,9 @@
 var recognizing = false;
 var final_transcript = '';
 var ignore_onend;
+var sampleText = "smoke weed everyday";
+var textArr = sampleText.split(" ");
+var index = 0;
 
 //Speech Recognition
 if(!('webkitSpeechRecognition' in window)){	
@@ -22,7 +25,7 @@ if(!('webkitSpeechRecognition' in window)){
 	//On Start
 	recognition.onstart = function(){
 		recognizing = true;
-		//startstoptoggle();
+		startstoptoggle();
 	};
 	
 	//On Error
@@ -44,7 +47,7 @@ if(!('webkitSpeechRecognition' in window)){
 	//On End
 	recognition.onend = function(){
 		recognizing = false;
-		//startstoptoggle();
+		startstoptoggle();
 		if(ignore_onend){
 			return;
 		}
@@ -64,23 +67,34 @@ if(!('webkitSpeechRecognition' in window)){
 		var interim_transcript = '';
 		for(var i = event.resultIndex; i < event.results.length; ++i){
 			var transcript = event.results[i][0].transcript;
-		    if (event.results[i].isFinal) {
+		    //if (event.results[i].isFinal) {
 		        //Check for Filler Words
-			    final_transcript += filler(transcript);
-		    } else {
-                /*Create function to increase um recognition confidence*/
+				//if(transcript.search(sampleText) != -1){
+					//final_transcript += filler(transcript);
+				//}
+		    //} else {
+				console.log(transcript);
+				if(transcript.search(textArr[index]) != -1){
+					final_transcript += textArr[index] + " ";
+					index ++;
+					if(index == textArr.length){
+						index = 0;
+					} 
+					console.log(index);
+				}
 				interim_transcript += transcript;
-			}
+			//}
 		}
 		
 		//Final Text
 		final_transcript = capitalize(final_transcript);
 		final_span.innerHTML = linebreak(final_transcript);
-		interim_span.innerHTML = linebreak(interim_transcript);
+		//interim_span.innerHTML = linebreak(interim_transcript);
 		if(final_transcript||interim_transcript){
 			//showButtons('inline-block');
 		}
 	};
+	
 }
 
 /*Functions for Results*/
@@ -118,13 +132,16 @@ function filler(s) {
 }
 
 //Button Text Change WIP
-/*
+
 function startstoptoggle(){
 	//alert("Button Text Change called!");
 	var buttonelem = document.getElementById("button");
-	if (buttonelem.value == "Click to Start")
-			buttomelem.value = "Click to Stop";
-	else
-		buttonelem.value = "Click to Start";
+	buttonelem.value = "HELLO";
+	
+	if (buttonelem.innerHTML == "Click to start"){
+			buttonelem.innerHTML = "Click to stop";
+	}else{
+		buttonelem.innerHTML = "Click to start";
+	}
 }
-*/
+
