@@ -2,8 +2,10 @@
 var recognizing = false;
 var final_transcript = '';
 var ignore_onend;
-var sampleText = "smoke weed everyday";
-var textArr = sampleText.split(" ");
+var sampleText = "I want to tell you a story.";
+var attempts = 0;
+console.log(sampleText);
+var textArr = sampleText.replace(/[\.,-\/#!$%\^&\*;:{}=\-_~()]/g,"").split(" ");
 var index = 0;
 
 //Speech Recognition
@@ -66,24 +68,34 @@ if(!('webkitSpeechRecognition' in window)){
 		//Interim Text
 		var interim_transcript = '';
 		for(var i = event.resultIndex; i < event.results.length; ++i){
+			//Check Index in bounds
+			if(index >= textArr.length){
+				recognizing = false;
+				return;
+			} 
+			
+			//Process Transcript
 			var transcript = event.results[i][0].transcript;
-		    //if (event.results[i].isFinal) {
-		        //Check for Filler Words
-				//if(transcript.search(sampleText) != -1){
-					//final_transcript += filler(transcript);
-				//}
-		    //} else {
-				console.log(transcript);
-				if(transcript.search(textArr[index]) != -1){
-					final_transcript += textArr[index] + " ";
-					index ++;
-					if(index == textArr.length){
-						index = 0;
-					} 
-					console.log(index);
-				}
-				interim_transcript += transcript;
-			//}
+			console.log(attempts);
+			console.log(transcript);
+			
+			//Check for mispronunciation
+			if(attempts > 10){
+				final_transcript += "<em>" + textArr[index] + "</em> ";
+				attempts = 0;
+				index += 1;
+			}
+			attempts += 1;
+			
+			//Check for words
+			if(transcript.toLowerCase().search(textArr[index].toLowerCase()) != -1){
+				final_transcript += textArr[index] + " ";
+				index += 1;
+				attempts = 0;
+			}
+			
+			//Output Transcript
+			interim_transcript += transcript;
 		}
 		
 		//Final Text
@@ -144,4 +156,3 @@ function startstoptoggle(){
 		buttonelem.innerHTML = "Click to start";
 	}
 }
-
