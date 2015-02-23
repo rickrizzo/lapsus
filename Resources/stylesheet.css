@@ -19,11 +19,16 @@ nav ul {
     margin: 0 auto;
     list-style: none;
     text-align: center;
-    float: center;
 }
 
 nav ul a{
     font-size: 24px;
+    text-decoration: none;
+    color: white;
+}
+
+nav ul a:hover {
+    color: #f2f195;
 }
 
 nav ul li{
@@ -36,7 +41,6 @@ nav ul li{
 }
 
 nav ul li:hover {
-    background: #8b4a75;
     color:#f2f195;
 }
 
