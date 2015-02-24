@@ -69,6 +69,20 @@ nav ul li:hover ul {
     visibility: visible;
 }
 
+/*Nav Search*/
+.search{
+	padding: 8px 15px;
+	border: 2px solid #dbdbdb;
+}
+
+.button{
+	position:relative;
+	padding: 8px 15px;
+	left: -8px;
+	background-color: #bde2eb;
+	border: 2px solid #bde2eb;
+}
+
 /*Header*/
 header {
     text-align: center;

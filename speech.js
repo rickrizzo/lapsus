@@ -63,42 +63,46 @@ if(!('webkitSpeechRecognition' in window)){
 		}
 	};
 	
+	console.log(textArr[6]);
+	
 	//On Result
-	recognition.onresult = function(event){
+	recognition.onresult = function (event) {
+
 		//Interim Text
 		var interim_transcript = '';
-		for(var i = event.resultIndex; i < event.results.length; ++i){
-			//Check Index in bounds
-			if(index >= textArr.length){
-				recognizing = false;
-				return;
-			} 
+		for (var i = event.resultIndex; i < event.results.length; ++i) {
+
+		    //Check Index in bounds
+		    if (index == textArr.length) {
+		        recognizing = false;
+		        break;
+		    }
 			
 			//Process Transcript
 			var transcript = event.results[i][0].transcript;
-			console.log(attempts);
-			console.log(transcript);
 			
 			//Check for mispronunciation
-			if(attempts > 10){
-				final_transcript += "<em>" + textArr[index] + "</em> ";
-				attempts = 0;
-				index += 1;
-			}
-			attempts += 1;
-			
-			//Check for words
-			if(transcript.toLowerCase().search(textArr[index].toLowerCase()) != -1){
+			if (attempts > 10) {
+			    final_transcript += "<em>" + textArr[index] + "</em> ";
+			    attempts = 0;
+			    index += 1;
+			    console.log("INDEX" + index);
+			}else if(transcript.toLowerCase().search(textArr[index].toLowerCase()) != -1){
 				final_transcript += textArr[index] + " ";
-				index += 1;
 				attempts = 0;
+				index += 1;
+				console.log("INDEX" + index);
 			}
+			
+			attempts += 1;
 			
 			//Output Transcript
 			interim_transcript += transcript;
+			
+			
 		}
 		
-		//Final Text
+		////Final Text
 		final_transcript = capitalize(final_transcript);
 		final_span.innerHTML = linebreak(final_transcript);
 		//interim_span.innerHTML = linebreak(interim_transcript);

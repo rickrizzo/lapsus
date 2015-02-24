@@ -25,8 +25,10 @@
                   </ul>
             </li>
 						<li>
-							<input type="search" placeholder="Search Lessons"/>
-							<input type="submit" value="Search"/>
+							<form>
+								<input class="search" type="search" placeholder="Search Lessons..." required>
+								<input class="button" type="submit" value="Search">
+							</form>
 						</li>
             <li>Log In</li>
             <li>Sign Up</li>
@@ -43,8 +45,8 @@
 			<span id="final_span" class="final"></span>
 			<span id="interim_span" class="interim"></span>
 		</div>
-		<!--<textarea id="textarea" rows = 10 cols = 80></textarea>
-		<button id="button" onclick="recognition.start()">Click to start</button>-->
+		<!--<textarea id="textarea" rows = 10 cols = 80></textarea>-->
+		<button id="button" onclick="recognition.start()">Click to start</button>
 		<input type="image" class="grow" id = "mic" src="Resources/microphone.png" title="Click to start!" alt="button" onclick="recognition.start()">
 	</div>
 	
