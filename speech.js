@@ -160,3 +160,40 @@ function startstoptoggle(){
 		buttonelem.innerHTML = "Click to start";
 	}
 }
+
+
+//Frequency Table
+
+/*
+	WIP
+	This function will use two arrays to keep track of how often
+	words are used in the final transcript. 	
+*/
+	
+function freqtable(ftrans) {
+
+	var wordcounts = new Map();
+	var inputwords = "";
+	
+	while (i != ftrans.length) {	//Add all words to the frequency table
+		if (ftrans[i] != " ") {	//Build the word to place into array
+			inputword += ftrans[i];
+			++i;
+		}
+		else{
+			var count;
+			count = wordcounts.get(inputword);
+			if (count) {	//Increment word occurrence
+				wordcounts.set(inputword, count + 1);
+			}
+			else {	//Add the word with an occurrence of one
+				wordcounts.set(inputword, 1);
+			}
+			++i;
+		}
+	}
+	
+	//debug
+	console.log(wordcounts.get("hi"));
+	
+}	
