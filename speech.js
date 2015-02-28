@@ -10,7 +10,7 @@ if(!('webkitSpeechRecognition' in window)){
     console.log(sampleText);
     var textArr = sampleText.replace(/[\.,-\/#!$%\^&\*;:{}=\-_~()]/g, "").split(" ");
     var index = 0;
-
+    var m = {};
 	
     //Recognition Variable
     var recognizing = false;
@@ -68,29 +68,40 @@ if(!('webkitSpeechRecognition' in window)){
 		var interim_transcript = '';
 		for (var i = event.resultIndex; i < event.results.length; ++i) {
 
-		    //Check Index in bounds
-		    if (index == textArr.length) {
-		        recognizing = false;
-		        break;
-		    }
-
 			//Process Transcript
 		    var transcript = event.results[i][0].transcript;
             
 
 		    if (event.results[i].isFinal) {
-		        final_transcript += transcript;
-		        for (i in iMap) {
-		            console.log(i + iMap[i]);
+		        var temp = transcript.split(" ");
+		        for (var x = 0; x < temp.length; x++) {
+
+                    //Filler Check
+		            if (temp[x] == "like") {
+		                continue;
+		            }
+
+                    //Check Word
+		            if (temp[x] == textArr[index]) {
+		                index++;
+		            } else if (temp[x] in m) {
+		                index++;
+		            } else {
+		                temp[x] = "<em>" + textArr[index] + "</em>";
+		                index++;
+		            }
 		        }
+		        transcript = temp.join(" ") + " ";
+		        m = {};
+		        final_transcript += transcript;
 		    } else {
 		        interim_transcript += transcript;
 		        var temp = interim_transcript.split(" ");
-		        for (elm in temp) {
-		            if (elm in iMap) {
-		                a[elm]++;
+		        for (i in temp) {
+		            if (i in m) {
+		                m[i]++;
 		            } else {
-		                a[elm] = 1;
+		                m[i] = 0;
 		            }
 		        }
 		    }
@@ -162,7 +173,6 @@ function filler(s) {
 }
 
 //Button Text Change WIP
-
 function startstoptoggle(){
 	//alert("Button Text Change called!");
 	var buttonelem = document.getElementById("button");
@@ -176,6 +186,7 @@ function startstoptoggle(){
 }
 
 
+
 //Frequency Table
 
 /*
@@ -183,31 +194,31 @@ function startstoptoggle(){
 	This function will use two arrays to keep track of how often
 	words are used in the final transcript. 	
 */
-	
+
 function freqtable(ftrans) {
 
-	var wordcounts = new Map();
-	var inputwords = "";
-	
-	while (i != ftrans.length) {	//Add all words to the frequency table
-		if (ftrans[i] != " ") {	//Build the word to place into array
-			inputword += ftrans[i];
-			++i;
-		}
-		else{
-			var count;
-			count = wordcounts.get(inputword);
-			if (count) {	//Increment word occurrence
-				wordcounts.set(inputword, count + 1);
-			}
-			else {	//Add the word with an occurrence of one
-				wordcounts.set(inputword, 1);
-			}
-			++i;
-		}
-	}
-	
-	//debug
-	console.log(wordcounts.get("hi"));
-	
-}	
+    var wordcounts = new Map();
+    var inputwords = "";
+
+    while (i != ftrans.length) {	//Add all words to the frequency table
+        if (ftrans[i] != " ") {	//Build the word to place into array
+            inputword += ftrans[i];
+            ++i;
+        }
+        else {
+            var count;
+            count = wordcounts.get(inputword);
+            if (count) {	//Increment word occurrence
+                wordcounts.set(inputword, count + 1);
+            }
+            else {	//Add the word with an occurrence of one
+                wordcounts.set(inputword, 1);
+            }
+            ++i;
+        }
+    }
+
+    //debug
+    console.log(wordcounts.get("hi"));
+
+}
