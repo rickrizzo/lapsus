@@ -1,23 +1,21 @@
-//Variables
-var recognizing = false;
-var final_transcript = '';
-var ignore_onend;
-var sampleText = "I want to tell you a story.";
-var attempts = 0;
-console.log(sampleText);
-var textArr = sampleText.replace(/[\.,-\/#!$%\^&\*;:{}=\-_~()]/g,"").split(" ");
-var index = 0;
-
-//Speech Recognition
+//Browser Check
 if(!('webkitSpeechRecognition' in window)){	
-	
-	//If Not on Webkit
 	upgrade();
+} else {
 
-}else{
+    //Variables
+    var ignore_onend;
+    var sampleText = "I want to tell you a story.";
+    var attempts = 0;
+    console.log(sampleText);
+    var textArr = sampleText.replace(/[\.,-\/#!$%\^&\*;:{}=\-_~()]/g, "").split(" ");
+    var index = 0;
+
 	
-	//Recognition Variable
-	var recognition = new webkitSpeechRecognition();
+    //Recognition Variable
+    var recognizing = false;
+    var recognition = new webkitSpeechRecognition();
+    var final_transcript = '';
 	
 	//API Options
 	recognition.continuous = true;
@@ -27,7 +25,7 @@ if(!('webkitSpeechRecognition' in window)){
 	//On Start
 	recognition.onstart = function(){
 		recognizing = true;
-		startstoptoggle();
+		//startstoptoggle();
 	};
 	
 	//On Error
@@ -49,7 +47,7 @@ if(!('webkitSpeechRecognition' in window)){
 	//On End
 	recognition.onend = function(){
 		recognizing = false;
-		startstoptoggle();
+		//startstoptoggle();
 		if(ignore_onend){
 			return;
 		}
@@ -63,8 +61,6 @@ if(!('webkitSpeechRecognition' in window)){
 		}
 	};
 	
-	console.log(textArr[6]);
-	
 	//On Result
 	recognition.onresult = function (event) {
 
@@ -77,27 +73,45 @@ if(!('webkitSpeechRecognition' in window)){
 		        recognizing = false;
 		        break;
 		    }
-			
+
 			//Process Transcript
-			var transcript = event.results[i][0].transcript;
+		    var transcript = event.results[i][0].transcript;
+            
+
+		    if (event.results[i].isFinal) {
+		        final_transcript += transcript;
+		        for (i in iMap) {
+		            console.log(i + iMap[i]);
+		        }
+		    } else {
+		        interim_transcript += transcript;
+		        var temp = interim_transcript.split(" ");
+		        for (elm in temp) {
+		            if (elm in iMap) {
+		                a[elm]++;
+		            } else {
+		                a[elm] = 1;
+		            }
+		        }
+		    }
 			
 			//Check for mispronunciation
-			if (attempts > 10) {
-			    final_transcript += "<em>" + textArr[index] + "</em> ";
-			    attempts = 0;
-			    index += 1;
-			    console.log("INDEX" + index);
-			}else if(transcript.toLowerCase().search(textArr[index].toLowerCase()) != -1){
-				final_transcript += textArr[index] + " ";
-				attempts = 0;
-				index += 1;
-				console.log("INDEX" + index);
-			}
+			//if (attempts > 10) {
+			//    final_transcript += "<em>" + textArr[index] + "</em> ";
+			//    attempts = 0;
+			//    index += 1;
+			//    console.log("INDEX" + index);
+			//}else if(transcript.toLowerCase().search(textArr[index].toLowerCase()) != -1){
+			//	final_transcript += textArr[index] + " ";
+			//	attempts = 0;
+			//	index += 1;
+			//	console.log("INDEX" + index);
+			//}
 			
-			attempts += 1;
+			//attempts += 1;
 			
 			//Output Transcript
-			interim_transcript += transcript;
+			//interim_transcript += transcript;
 			
 			
 		}
@@ -105,7 +119,7 @@ if(!('webkitSpeechRecognition' in window)){
 		////Final Text
 		final_transcript = capitalize(final_transcript);
 		final_span.innerHTML = linebreak(final_transcript);
-		//interim_span.innerHTML = linebreak(interim_transcript);
+		interim_span.innerHTML = linebreak(interim_transcript);
 		if(final_transcript||interim_transcript){
 			//showButtons('inline-block');
 		}
