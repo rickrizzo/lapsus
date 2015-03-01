@@ -50,6 +50,12 @@ input{
     width: 50%
 }
 
+#submit{
+    position:relative;
+    left: -2em;
+    border: 2px solid #dddddd;
+}
+
 header {
     background-color: white;
     text-align: center;
@@ -106,6 +112,17 @@ button img{
     border-radius: 100%;
     background-color: red;
     box-shadow: 0 0.1em 1px rgba(142, 142, 142, 0.46);
+}
+
+#results{
+    position: fixed;
+    display: none;
+    left: 50%;
+    bottom: 50%;
+    width: 75%;
+    height: 75%;
+    background-color: green;    
+    margin: 0 0 -20% -37.5%;
 }
 
 footer{

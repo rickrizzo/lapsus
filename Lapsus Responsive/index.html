@@ -15,7 +15,7 @@
             <li>
                 <form action="/" method="post">
                     <input type="search" name="search" id="search" placeholder="Search Lessons" />
-                    <input type="submit" name="submit" value="Search" />
+                    <input type="submit" name="submit" id="submit" value="Search" />
                 </form>
             </li>
             <li>Login</li>
@@ -77,8 +77,15 @@
         </section>
     </div>
 
+    <!--Speech Results-->
+    <div id="results">
+	    <span id="final_span" class="final"></span>
+		<span id="interim_span" class="interim"></span>
+	</div>
+
+
     <!--Button-->
-    <button id="startButton" onclick="">
+    <button id="startButton" onclick="recognition.start()">
         <img src="microphone.png" alt="Start" />
     </button> 
 
@@ -87,5 +94,8 @@
         Created by Robert Russo, Josh Baik, Vijay Nambiar, Ylonka Machado, Peter Ko in collaboration
         with the Rensselaer Center for Open Source Technology and Design for America
     </footer>
+
+    <!--Scripts-->
+    <script type="text/javascript" src="speech.js"></script>
 </body>
 </html>
