@@ -68,13 +68,13 @@ if(!('webkitSpeechRecognition' in window)){
 		var interim_transcript = '';
 		for (var i = event.resultIndex; i < event.results.length; ++i) {
 
-			//Process Transcript
+			//Transcript
 		    var transcript = event.results[i][0].transcript;
             
-
+            //Format Output
 		    if (event.results[i].isFinal) {
 		        var temp = transcript.split(" ");
-		        for (var x = 0; x < temp.length; x++) {
+		        for (var x = 0; x < temp.length && index < textArr.length; x++) {
 
                     //Filler Check
 		            if (temp[x] == "like") {
@@ -82,26 +82,33 @@ if(!('webkitSpeechRecognition' in window)){
 		            }
 
                     //Check Word
-		            if (temp[x] == textArr[index]) {
-		                index++;
-		            } else if (temp[x] in m) {
-		                index++;
-		            } else {
-		                temp[x] = "<em>" + textArr[index] + "</em>";
-		                index++;
+		            if (temp[x] != textArr[index]){
+		                if (temp[x] in m && m[temp[x]] > 0) {
+		                    m[temp[x]] -= 1;
+		                } else {
+		                    temp[x] = "<em>" + textArr[index] + "</em>";
+		                }
 		            }
+
+                    //Increment Index
+		            index++;
 		        }
+
+                //Concat Transcript
 		        transcript = temp.join(" ") + " ";
 		        m = {};
 		        final_transcript += transcript;
 		    } else {
+                //Intermidiate Transcript
 		        interim_transcript += transcript;
 		        var temp = interim_transcript.split(" ");
+
+                //Populate Map Object
 		        for (i in temp) {
 		            if (i in m) {
 		                m[i]++;
 		            } else {
-		                m[i] = 0;
+		                m[i] = 1;
 		            }
 		        }
 		    }
@@ -131,9 +138,9 @@ if(!('webkitSpeechRecognition' in window)){
 		final_transcript = capitalize(final_transcript);
 		final_span.innerHTML = linebreak(final_transcript);
 		interim_span.innerHTML = linebreak(interim_transcript);
-		if(final_transcript||interim_transcript){
+		//if(final_transcript||interim_transcript){
 			//showButtons('inline-block');
-		}
+		//}
 	};
 	
 }
@@ -188,6 +195,11 @@ function startstoptoggle(){
 
 
 //Frequency Table
+
+//To Peter
+//Pro Tip: ftrans.split(" ") will give you an 
+//array of the final transcript with every word
+
 
 /*
 	WIP
