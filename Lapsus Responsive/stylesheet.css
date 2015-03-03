@@ -1,6 +1,6 @@
-﻿body {
+body {
     font-size: 100%;
-    font-family: Arial, sans-serif;
+    font-family: Montserrat;
     line-height: 2em;
     margin: 0;
 }
@@ -11,8 +11,8 @@ h1 {
 }
 
 h2 {
-    font-size: 3em;
-    line-height: 0.8em; 
+    font-size: 2em;
+    line-height: 0.2em; 
 }
 
 header p{
@@ -20,9 +20,9 @@ header p{
 }
 
 nav {
-    background-color:blueviolet;
+    background-color:#63bbbf;
     color: white;
-    font-size: 1.3em;
+    font-size: 1em;
     padding: 1em;
 }
 
@@ -30,10 +30,14 @@ nav ul {
     margin:0;    
 }
 
-
 nav ul li {
     display:inline;
     margin: 1em;
+}
+
+nav ul li:hover {
+    color: #f2f195;
+    cursor: pointer;
 }
 
 form{
@@ -68,10 +72,14 @@ a{
 
 .btn{
     display: inline-block;
-    background-color:royalblue;
+    background-color:orangered;
     padding: 1em 2em;
     margin: 1em;
     border-radius: 1.2em;
+}
+
+.btn:hover{
+    color: #f2f195;
 }
 
 blockquote {
@@ -110,7 +118,7 @@ button img{
     height: 100%;
     width: 100%;
     border-radius: 100%;
-    background-color: red;
+    background-color: white;
     box-shadow: 0 0.1em 1px rgba(142, 142, 142, 0.46);
 }
 
@@ -128,8 +136,9 @@ button img{
 footer{
     text-align:center;
     padding: 1em;
-    background-color: blueviolet;
+    background-color: #63bbbf;
     color: white;
+    font-size: 0.8em;
 }
 
 @media screen and (min-width: 900px){
