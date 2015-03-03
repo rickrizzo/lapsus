@@ -1,6 +1,6 @@
 //Browser Check
-if(!('webkitSpeechRecognition' in window)){	
-	upgrade();
+if (!('webkitSpeechRecognition' in window)) {
+    upgrade();
 } else {
 
     //Variables
@@ -11,139 +11,182 @@ if(!('webkitSpeechRecognition' in window)){
     var textArr = sampleText.replace(/[\.,-\/#!$%\^&\*;:{}=\-_~()]/g, "").split(" ");
     var index = 0;
     var m = {};
-	
+
     //Recognition Variable
     var recognizing = false;
     var recognition = new webkitSpeechRecognition();
     var final_transcript = '';
-	
-	//API Options
-	recognition.continuous = true;
-	recognition.interimResults = true;
-	recognition.lang = "en-US";
-	
-	//On Start
-	recognition.onstart = function () {
-	    recognizing = true;
-	    document.getElementById("results").style.display = "block";
-		//startstoptoggle();
-	};
-	
-	//On Error
-	recognition.onerror = function(event){
-		//Silence
-		if(event.error == 'no-speech'){
-			ignore_onend = true;
-		}
-		//No Microphone
-		if(event.error == 'audio-capture'){
-			ignore_onend = true;
-		}
-		//No Allowed
-		if(event.error == 'not-allowed'){
-			ignore_onend == true;
-		}	
-	};
-	
-	//On End
-	recognition.onend = function(){
-		recognizing = false;
-		//startstoptoggle();
-		if(ignore_onend){
-			return;
-		}
-		//If no final transcript
-		if(!final_transcript){
-			return;
-		}
-		if(window.getSelection){
-			/*window.getSelection().removeAllRanges();
+
+    //API Options
+    recognition.continuous = true;
+    recognition.interimResults = true;
+    recognition.lang = "en-US";
+
+    //On Start
+    recognition.onStart = function () {
+        recognizing = true;
+        //startstoptoggle();
+    };
+
+    //On Error
+    recognition.onerror = function (event) {
+        //Silence
+        if (event.error == 'no-speech') {
+            ignore_onend = true;
+        }
+        //No Microphone
+        if (event.error == 'audio-capture') {
+            ignore_onend = true;
+        }
+        //No Allowed
+        if (event.error == 'not-allowed') {
+            ignore_onend == true;
+        }
+    };
+
+    //On End
+    recognition.onend = function () {
+        recognizing = false;
+        //startstoptoggle();
+        if (ignore_onend) {
+            return;
+        }
+        //If no final transcript
+        if (!final_transcript) {
+            return;
+        }
+        if (window.getSelection) {
+            /*window.getSelection().removeAllRanges();
 			var range = document.createRange();*/
-		}
-	};
-	
-	//On Result
-	recognition.onresult = function (event) {
+        }
+    };
 
-		//Interim Text
-		var interim_transcript = '';
-		for (var i = event.resultIndex; i < event.results.length; ++i) {
+    //On Result
+    recognition.onresult = function (event) {
 
-			//Transcript
-		    var transcript = event.results[i][0].transcript;
-            
+        //Interim Text
+        var interim_transcript = '';
+        for (var i = event.resultIndex; i < event.results.length; ++i) {
+
+            //Transcript
+            var transcript = event.results[i][0].transcript;
+
             //Format Output
-		    if (event.results[i].isFinal) {
-		        var temp = transcript.split(" ");
-		        for (var x = 0; x < temp.length && index < textArr.length; x++) {
+            if (event.results[i].isFinal) {
+                if (index === textArr.length) {
+                    break;
+                }
+                var temp = transcript.split(" ");
+                for (var x = 0; x < temp.length; x++) {
 
                     //Filler Check
-		            if (temp[x] == "like") {
-		                continue;
-		            }
+                    if (temp[x] == "like") {
+                        continue;
+                    }
 
                     //Check Word
-		            if (temp[x] != textArr[index]){
-		                if (temp[x] in m && m[temp[x]] > 0) {
-		                    m[temp[x]] -= 1;
-		                } else {
-		                    temp[x] = "<em>" + textArr[index] + "</em>";
-		                }
-		            }
+                    if (temp[x] != textArr[index]) {
+                        if (temp[x] in m) {
+                            m[temp[x]] -= 1;
+                            textArr[index] = m[temp[x]];
+                        } else {
+                            temp[x] = "<em>" + textArr[index] + "</em>";
+                        }
+                    }
 
                     //Increment Index
-		            index++;
-		        }
+                    index++;
+                }
 
                 //Concat Transcript
-		        transcript = temp.join(" ") + " ";
-		        m = {};
-		        final_transcript += transcript;
-		    } else {
+                transcript = temp.join(" ") + " ";
+                m = {};
+                final_transcript += transcript;
+            } else {
                 //Intermidiate Transcript
-		        interim_transcript += transcript;
-		        var temp = interim_transcript.split(" ");
+                interim_transcript += transcript;
+                console.log(transcript);
+                var temp = interim_transcript.split(" ");
 
                 //Populate Map Object
-		        for (i in temp) {
-		            if (i in m) {
-		                m[i]++;
-		            } else {
-		                m[i] = 1;
-		            }
-		        }
-		    }
-			
-			//Check for mispronunciation
-			//if (attempts > 10) {
-			//    final_transcript += "<em>" + textArr[index] + "</em> ";
-			//    attempts = 0;
-			//    index += 1;
-			//    console.log("INDEX" + index);
-			//}else if(transcript.toLowerCase().search(textArr[index].toLowerCase()) != -1){
-			//	final_transcript += textArr[index] + " ";
-			//	attempts = 0;
-			//	index += 1;
-			//	console.log("INDEX" + index);
-			//}
-			
-			//attempts += 1;
-			
-			//Output Transcript
-			//interim_transcript += transcript;
-			
-			
-		}
-		
-		////Final Text
-		final_transcript = capitalize(final_transcript);
-		final_span.innerHTML = linebreak(final_transcript);
-		interim_span.innerHTML = linebreak(interim_transcript);
-		//if(final_transcript||interim_transcript){
-			//showButtons('inline-block');
-		//}
-	};
-	
+                for (i in temp) {
+                    if (i in m) {
+                        m[i]++;
+                    } else {
+                        m[i] = 1;
+                    }
+                }
+            }
+
+
+            ////Process Transcript
+            //var transcript = event.results[i][0].transcript;
+
+
+            //if (event.results[i].isFinal) {
+            //    var temp = transcript.split(" ");
+            //    for (var x = 0; x < temp.length; x++) {
+
+            //        //Filler Check
+            //        if (temp[x] == "like") {
+            //            continue;
+            //        }
+
+            //        //Check Word
+            //        if (temp[x] == textArr[index]) {
+            //            index++;
+            //        } else if (temp[x] in m) {
+            //            index++;
+            //        } else {
+            //            temp[x] = "<em>" + textArr[index] + "</em>";
+            //            index++;
+            //        }
+            //    }
+            //    transcript = temp.join(" ") + " ";
+            //    m = {};
+            //    final_transcript += transcript;
+            //} else {
+            //    interim_transcript += transcript;
+            //    var temp = interim_transcript.split(" ");
+            //    for (i in temp) {
+            //        if (i in m) {
+            //            m[i]++;
+            //        } else {
+            //            m[i] = 0;
+            //        }
+            //    }
+        }
+
+        //Check for mispronunciation
+        //if (attempts > 10) {
+        //    final_transcript += "<em>" + textArr[index] + "</em> ";
+        //    attempts = 0;
+        //    index += 1;
+        //    console.log("INDEX" + index);
+        //}else if(transcript.toLowerCase().search(textArr[index].toLowerCase()) != -1){
+        //	final_transcript += textArr[index] + " ";
+        //	attempts = 0;
+        //	index += 1;
+        //	console.log("INDEX" + index);
+        //}
+
+        //attempts += 1;
+
+        //Output Transcript
+        //interim_transcript += transcript;
+
+
+
+
+        ////Final Text
+        final_transcript = capitalize(final_transcript);
+        final_span.innerHTML = linebreak(final_transcript);
+        interim_span.innerHTML = linebreak(interim_transcript);
+        if (final_transcript || interim_transcript) {
+            //showButtons('inline-block');
+        }
+    };
+
 }
 
 /*Functions for Results*/
@@ -153,18 +196,18 @@ var one_line = /\n/g;
 var first_char = /\S/;
 
 //Upgrade
-function upgrade(){
-	alert("Please upgrade your browser! (Try Switching to Chrome");
+function upgrade() {
+    alert("Please upgrade your browser! (Try Switching to Chrome");
 }
 
 //Linebreak
-function linebreak(s){
-	return s.replace(two_line, '<p></p>').replace(one_line, '<br>');
+function linebreak(s) {
+    return s.replace(two_line, '<p></p>').replace(one_line, '<br>');
 }
 
 //Capitalize
-function capitalize(s){
-	return s.replace(first_char, function(m){return m.toUpperCase();})	;
+function capitalize(s) {
+    return s.replace(first_char, function (m) { return m.toUpperCase(); });
 }
 
 //Filler Words
@@ -181,26 +224,21 @@ function filler(s) {
 }
 
 //Button Text Change WIP
-function startstoptoggle(){
-	//alert("Button Text Change called!");
-	var buttonelem = document.getElementById("button");
-	buttonelem.value = "HELLO";
-	
-	if (buttonelem.innerHTML == "Click to start"){
-			buttonelem.innerHTML = "Click to stop";
-	}else{
-		buttonelem.innerHTML = "Click to start";
-	}
+function startstoptoggle() {
+    //alert("Button Text Change called!");
+    var buttonelem = document.getElementById("button");
+    buttonelem.value = "HELLO";
+
+    if (buttonelem.innerHTML == "Click to start") {
+        buttonelem.innerHTML = "Click to stop";
+    } else {
+        buttonelem.innerHTML = "Click to start";
+    }
 }
 
 
 
 //Frequency Table
-
-//To Peter
-//Pro Tip: ftrans.split(" ") will give you an 
-//array of the final transcript with every word
-
 
 /*
 	WIP
