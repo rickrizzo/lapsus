@@ -129,3 +129,8 @@ header h1{
 footer{
     text-align: center;
 }
+
+em{
+    text-decoration: none;
+    color: red;
+}

@@ -5,7 +5,7 @@ if(!('webkitSpeechRecognition' in window)){
 
     //Variables
     var ignore_onend;
-    var sampleText = "I want to tell you a story.";
+    var sampleText = "Thank you RCOS!";
     var attempts = 0;
     console.log(sampleText);
     var textArr = sampleText.replace(/[\.,-\/#!$%\^&\*;:{}=\-_~()]/g, "").split(" ");
@@ -23,7 +23,7 @@ if(!('webkitSpeechRecognition' in window)){
 	recognition.lang = "en-US";
 	
 	//On Start
-	recognition.onstart = function(){
+	recognition.onStart = function(){
 		recognizing = true;
 		//startstoptoggle();
 	};
@@ -63,87 +63,25 @@ if(!('webkitSpeechRecognition' in window)){
 	
 	//On Result
 	recognition.onresult = function (event) {
-
-		//Interim Text
-		var interim_transcript = '';
-		for (var i = event.resultIndex; i < event.results.length; ++i) {
-
-			//Transcript
-		    var transcript = event.results[i][0].transcript;
-            
-            //Format Output
-		    if (event.results[i].isFinal) {
-		        var temp = transcript.split(" ");
-		        for (var x = 0; x < temp.length && index < textArr.length; x++) {
-
-                    //Filler Check
-		            if (temp[x] == "like") {
-		                continue;
-		            }
-
-                    //Check Word
-		            if (temp[x] != textArr[index]){
-		                if (temp[x] in m && m[temp[x]] > 0) {
-		                    m[temp[x]] -= 1;
-		                } else {
-		                    temp[x] = "<em>" + textArr[index] + "</em>";
-		                }
-		            }
-
-                    //Increment Index
-		            index++;
-		        }
-
-                //Concat Transcript
-		        transcript = temp.join(" ") + " ";
-		        m = {};
-		        final_transcript += transcript;
-		    } else {
-                //Intermidiate Transcript
-		        interim_transcript += transcript;
-		        var temp = interim_transcript.split(" ");
-
-                //Populate Map Object
-		        for (i in temp) {
-		            if (i in m) {
-		                m[i]++;
-		            } else {
-		                m[i] = 1;
-		            }
-		        }
-		    }
-			
-			//Check for mispronunciation
-			//if (attempts > 10) {
-			//    final_transcript += "<em>" + textArr[index] + "</em> ";
-			//    attempts = 0;
-			//    index += 1;
-			//    console.log("INDEX" + index);
-			//}else if(transcript.toLowerCase().search(textArr[index].toLowerCase()) != -1){
-			//	final_transcript += textArr[index] + " ";
-			//	attempts = 0;
-			//	index += 1;
-			//	console.log("INDEX" + index);
-			//}
-			
-			//attempts += 1;
-			
-			//Output Transcript
-			//interim_transcript += transcript;
-			
-			
-		}
-		
-		////Final Text
-		final_transcript = capitalize(final_transcript);
-		final_span.innerHTML = linebreak(final_transcript);
-		interim_span.innerHTML = linebreak(interim_transcript);
-		//if(final_transcript||interim_transcript){
-			//showButtons('inline-block');
-		//}
+	    var interim_transcript = '';
+	    for (var i = event.resultIndex; i < event.results.length; ++i) {
+	        if (event.results[i].isFinal) {
+	            transcript = event.results[i][0].transcript;
+	            transcript = filler(transcript);
+	            final_transcript += transcript;
+	        } else {
+	            interim_transcript += event.results[i][0].transcript;
+	        }
+	    }
+	    final_transcript = capitalize(final_transcript);
+	    final_span.innerHTML = linebreak(final_transcript);
+	    interim_span.innerHTML = linebreak(interim_transcript);
+	    if (final_transcript || interim_transcript) {
+	        //showButtons('inline-block');
+	    }
 	};
+	}
 	
-}
 
 /*Functions for Results*/
 //Variables
@@ -168,11 +106,12 @@ function capitalize(s){
 
 //Filler Words
 function filler(s) {
-    if (s.search("um") != -1) {
-        var index = s.search("um");
+    if (s.search("like") != -1) {
+        var index = s.search("like");
+        console.log(index)
         var p1 = s.slice(0, index);
-        var p2 = s.slice(index + 2);
-        var word = s.slice(index, index + "um".length);
+        var p2 = s.slice(index + 4);
+        var word = s.slice(index, index + "like".length);
         return p1 + "<em>" + word + "</em>" + p2;
     } else {
         return s;
@@ -196,41 +135,36 @@ function startstoptoggle(){
 
 //Frequency Table
 
-//To Peter
-//Pro Tip: ftrans.split(" ") will give you an 
-//array of the final transcript with every word
-
-
 /*
 	WIP
 	This function will use two arrays to keep track of how often
 	words are used in the final transcript. 	
 */
 
-function freqtable(ftrans) {
+    function freqtable(ftrans) {
 
-    var wordcounts = new Map();
-    var inputwords = "";
+        var wordcounts = new Map();
+        var inputwords = "";
 
-    while (i != ftrans.length) {	//Add all words to the frequency table
-        if (ftrans[i] != " ") {	//Build the word to place into array
-            inputword += ftrans[i];
-            ++i;
-        }
-        else {
-            var count;
-            count = wordcounts.get(inputword);
-            if (count) {	//Increment word occurrence
-                wordcounts.set(inputword, count + 1);
+        while (i != ftrans.length) {	//Add all words to the frequency table
+            if (ftrans[i] != " ") {	//Build the word to place into array
+                inputword += ftrans[i];
+                ++i;
             }
-            else {	//Add the word with an occurrence of one
-                wordcounts.set(inputword, 1);
+            else {
+                var count;
+                count = wordcounts.get(inputword);
+                if (count) {	//Increment word occurrence
+                    wordcounts.set(inputword, count + 1);
+                }
+                else {	//Add the word with an occurrence of one
+                    wordcounts.set(inputword, 1);
+                }
+                ++i;
             }
-            ++i;
         }
+
+        //debug
+        console.log(wordcounts.get("hi"));
+
     }
-
-    //debug
-    console.log(wordcounts.get("hi"));
-
-}

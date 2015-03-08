@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+	<!--Title-->
+	<title>Lapsus Linguae</title>
+	
+	<!--CSS-->
+	<link rel="stylesheet" type="text/css" href="resources/stylesheet.css">
+    <link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+</head>
+
+<body>
+        <!--Navigation Bar-->
+        <nav>
+        	<ul>
+        		<a href="index.html">Lapsus Linguae</a>
+						<img src="#" />
+            <li>
+							Browse Lessons
+								<ul>
+									<li>Your Speech</li>
+                  <li>Tongue Twisters</li>
+                  <li>Filler Words</li>
+                  </ul>
+            </li>
+						<li>
+							<form>
+								<input class="search" type="search" placeholder="Search Lessons..." required>
+								<input class="button" type="submit" value="Search">
+							</form>
+						</li>
+            <li>Log In</li>
+            <li>Sign Up</li>
+            </ul>
+        </nav>
+
+        <!--Header-->
+    <header>
+    </header>
+	
+	<!--Speech Recognition-->
+	<div id="speech">
+		<div id="results">
+			<span id="final_span" class="final"></span>
+			<span id="interim_span" class="interim"></span>
+		</div>
+		<!--<textarea id="textarea" rows = 10 cols = 80></textarea>-->
+		<button id="button" onclick="recognition.start()">Click to start</button>
+		<input type="image" class="grow" id = "mic" src="Resources/microphone.png" title="Click to start!" alt="button" onclick="recognition.start()">
+	</div>
+	
+	<!--Footer-->
+	<footer>
+		<p>Created by RCOS and DFA</p>
+	</footer>
+	
+	<!--Scripts-->
+	<script type="text/javascript" src="speech.js"></script>
+</body>
+
+</html>
