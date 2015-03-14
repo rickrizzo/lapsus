@@ -1,69 +1,100 @@
 <!DOCTYPE html>
-<html>
-
+<html lang="en">
 <head>
-	<!--Title-->
-	<title>Lapsus Linguae</title>
-	
-	<!--CSS-->
-	<link rel="stylesheet" type="text/css" href="resources/stylesheet.css">
-    <link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+    <title>Lapsus Linguae</title>
+    <link href="resources/css/stylesheet.css" rel="stylesheet" />
+    <link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'/>
 </head>
-
 <body>
-        <!--Navigation Bar-->
-        <nav>
-        	<ul>
-        		<a href="index.html">Lapsus Linguae</a>
-						<img src="#" />
+    <!--Navigation Bar-->
+    <nav>
+        <ul>
+            <li>Lapsus Linguae</li>
+            <li>Activities</li>
             <li>
-							Browse Lessons
-								<ul>
-									<li>Your Speech</li>
-                  <li>Tongue Twisters</li>
-                  <li>Filler Words</li>
-                  </ul>
+                <form action="/" method="post">
+                    <input type="search" name="search" id="search" placeholder="Search Lessons" />
+                    <input type="submit" name="submit" id="submit" value="Search" />
+                </form>
             </li>
-						<li>
-							<form>
-								<input class="search" type="search" placeholder="Search Lessons..." required>
-								<input class="button" type="submit" value="Search">
-							</form>
-						</li>
-            <li>Log In</li>
+            <li>Login</li>
             <li>Sign Up</li>
-            </ul>
-        </nav>
+        </ul>
+    </nav>
 
-        <!--Header-->
+    <!--Header-->
     <header>
+        <h1>Lapsus Linguae</h1>
+        <p>Improve your public speaking effortlessly</p>
+        <a class="btn" href="speech.html">Get Started</a>
     </header>
-	
-	<!--Speech Recognition-->
-	<div id="speech">
-		<div id="results">
-			<span id="final_span" class="final"></span>
-			<span id="interim_span" class="interim"></span>
-		</div>
-		<!--<textarea id="textarea" rows = 10 cols = 80></textarea>-->
-		<button id="button" onclick="recognition.start()">Click to start</button>
-		<input type="image" class="grow" id = "mic" src="Resources/microphone.png" title="Click to start!" alt="button" onclick="recognition.start()">
-	</div>
-	<!--Timer-->
-	<div class = "stopwatch">
-		<button id="timerStart">Start</button>
-		<button id="timerStop">Stop</button>
-		<button id="timerReset">Reset</button>  	
-	</div>
-	
-	<!--Footer-->
-	<footer>
-		<p>Created by RCOS and DFA</p>
-	</footer>
-	
-	<!--Scripts-->
-	<script type="text/javascript" src="speech.js"></script>
-	<script type="text/javascript" src="stopwatch.js"></script>
-</body>
 
+    <!--Quote-->
+    <blockquote cite="https://toddstocker.wordpress.com/">
+        <p>
+            "A speaker should approach his preparation not by what he wants to say,
+            but by what he wants to learn."
+            <footer>
+                - <a href="https://toddstocker.wordpress.com/">Todd Stocker</a>
+            </footer>
+        </p>
+    </blockquote>
+
+    <!--Main Body-->
+    <div id="main" role="main">
+        <section>
+            <h2>Practice Your Work</h2>
+            <p>
+                Everybody knows practice makes perfect. with Lapsus Linguae you
+                can upload a speech you're already working on. We'll analyze your speech and
+                provide valuable metrics to you so that you can improve on your pace, word choice,
+                filler words, and more!
+            </p>
+            <a class="btn" href="#">Get Started</a>
+        </section>
+
+        <section>
+            <h2>Improve Your Speech</h2>
+            <p>
+                Just looking to speak more formally? Our exercises are designed to
+                correct common errors when speaking English. Ranging from words that are difficult
+                to pronounce, to grammatical errors, and even brevity, we can bring your speech to
+                the next level, a skill sure to impress!
+            </p>
+            <a class="btn" href="#">Get Started</a>
+        </section>
+
+        <section>
+            <h2>What is this?</h2>
+            <p>
+                Lapsus Linguae is an open source project that takes advantage of the
+                HTML5 Web Speech API in order to analyze your speech and provide useful analytics so
+                that you can practice presenting in private, are receive objective feedback in the
+                process.
+            </p>
+            <a class="btn" href="#">Learn More</a>
+        </section>
+    </div>
+
+    <!--Speech Results-->
+    <div id="results">
+	    <span id="final_span" class="final"></span>
+		<span id="interim_span" class="interim"></span>
+	</div>
+
+
+    <!--Button-->
+    <button id="startButton" onclick="recognition.start()">
+        <img src="resources/img/microphone.png" alt="Start" />
+    </button> 
+
+    <!--Footer-->
+    <footer>
+        Created by Robert Russo, Josh Baik, Vijay Nambiar, Ylonka Machado, Peter Ko in collaboration
+        with the Rensselaer Center for Open Source Technology and Design for America
+    </footer>
+
+</body>
 </html>
