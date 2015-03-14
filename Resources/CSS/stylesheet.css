@@ -52,18 +52,43 @@ form{
     display: inline;
 }
 
-input{
+/*
+input {
     padding: 1em;
 }
 
-#search{
-    width: 50%
+#search { 
+    width: 55%;
 }
 
-#submit{
-    position:relative;
-    left: -2em;
-    border: 2px solid #dddddd;
+#searchbtn {
+    height: 100%;
+    position: relative;
+}
+*/
+
+.container-1{
+  width: 52%;
+  position: absolute;
+  white-space: nowrap;
+  position: relative;
+}
+
+.container-1 input#search{
+  width: 56%;
+  height: 2em;
+  background: #343d46;
+  border: none;
+  font-size: 10pt;
+  color: white;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+}
+
+::-webkit-input-placeholder { 
+    font-family: Montserrat; 
+    color: gray;
 }
 
 header {
