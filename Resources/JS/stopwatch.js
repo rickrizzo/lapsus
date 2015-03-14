@@ -15,7 +15,7 @@ var Stopwatch = function(elem, options) {
   // append elements     
   elem.appendChild(timer);
 	/*
-  elem.appendChild(startButton);
+  elem.appendChild(startButton);    
   elem.appendChild(stopButton);
   elem.appendChild(resetButton);
 	*/

@@ -102,6 +102,10 @@ function linebreak(s){
 
 //Filler Words
 function filler(s) {
+
+    /*Add punctionation stripping*/
+
+
 	//Make Array
 	s = s.split(" ");
 	if(speechIndex < speech.length){
@@ -119,17 +123,39 @@ function filler(s) {
 		//Cases
 		if(s[i].toUpperCase() == speech[speechIndex].toUpperCase()){
 			speechIndex ++;
-			alert("Match");
 		}else if(words.indexOf(s[i]) != -1){
-			s[i] = "<strong>" + s[i] + "</strong>";
+		    s[i] = "<i>" + s[i] + "</i>";
+		    //speechIndex = findNext(s, i);
 		}else{
-			s[i] = "<em>" + s[i] + "</em>"
+		    s[i] = "<em>" + s[i] + "</em>";
+		    //speechIndex = findNext(s, i);
 		}
 	}
 	
 	speech.join(" ");
 	return s.join(" ");
 }
+
+//Find Next Match
+function findNext(s, index){
+    
+    //Set to 
+    index = -1;
+
+    //Find Next Index of Match
+    while(index == -1 && speechIndex < speech.length){
+        for (var i = index; i < s.length; i++) {
+            if (s[i] == speech[speechIndex]) {
+                index = i;
+                break;
+            }
+        }
+        speechIndex++;
+    }
+
+    return index;
+}
+
 
 //Button Text Change WIP
 function startstoptoggle(){
