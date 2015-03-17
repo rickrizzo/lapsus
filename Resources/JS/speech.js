@@ -104,12 +104,13 @@ function linebreak(s){
 function filler(s) {
 
     /*Add punctionation stripping*/
-
+	var tempSpeech = speech.replace(/[\.,-\/#!$%\^&\*;:{}=\-_`~()]/g,"");
 
 	//Make Array
 	s = s.split(" ");
-	if(speechIndex < speech.length){
-		speech = speech.split(" ");
+	tempSpeech = tempSpeech.split(" ");
+	if(speechIndex >= speech.length){
+		return;
 	}
 	
 	//Find Words
@@ -121,7 +122,7 @@ function filler(s) {
 		}
 		
 		//Cases
-		if(s[i].toUpperCase() == speech[speechIndex].toUpperCase()){
+		if(s[i].toUpperCase() == tempSpeech[speechIndex].toUpperCase()){
 			speechIndex ++;
 		}else if(words.indexOf(s[i]) != -1){
 		    s[i] = "<i>" + s[i] + "</i>";
@@ -132,7 +133,6 @@ function filler(s) {
 		}
 	}
 	
-	speech.join(" ");
 	return s.join(" ");
 }
 
