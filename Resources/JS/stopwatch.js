@@ -69,7 +69,28 @@ var Stopwatch = function(elem, options) {
   }
 
   function render() {
-    timer.innerHTML = clock/1000; 
+						
+			var hours;
+			var	minutes;
+			var	seconds;
+					
+		  // calculate hours                
+      hours = parseInt(clock / 1000 / 60 / 60);
+            
+      // calculate minutes
+      minutes = parseInt(clock / 1000 / 60);
+      if (minutes >= 60) minutes %= 60;
+            
+			// calculate seconds
+			seconds = parseInt(clock / 1000);
+			if (seconds >= 60) seconds %= 60;
+			
+			// calculate double-digits
+			
+			
+			var finaltime = hours + ':' + minutes + '::' + seconds;
+		
+			timer.innerHTML = finaltime; 
   }
 
   function delta() {
