@@ -5,8 +5,10 @@ if(!('webkitSpeechRecognition' in window)){
 	
 	//Variables
 	var words = ["like", "um", "uh"];
-	var speech; 
-	var speechIndex = 0;
+	final_transcript = "";
+	/*var speech; 
+	var SpeechMap = mapSpeech(speech);
+	var speechIndex = 0;*/
 	
 
     //Recognition Variable
@@ -23,9 +25,8 @@ if(!('webkitSpeechRecognition' in window)){
 	//On Start
 	recognition.onstart = function(){
 		recognizing = true;
-		final_transcript = "";
-		speech = document.getElementById("textarea").value;
-		alert(speech);
+		/*speech = document.getElementById("textarea").value;*/
+		alert("Speak now");
 	};
 	
 	//On Result
@@ -34,15 +35,14 @@ if(!('webkitSpeechRecognition' in window)){
 	    for (var i = event.resultIndex; i < event.results.length; ++i) {
 	        if (event.results[i].isFinal) {
 	            transcript = event.results[i][0].transcript;
-	            transcript = filler(transcript);
+	            //transcript = filler(transcript);
 	            final_transcript += transcript;
 	        } else {
 	            interim_transcript += event.results[i][0].transcript;
 	        }
 	    }
-		
-		//Display Transcript
-	    final_span.innerHTML = linebreak(final_transcript);
+
+		final_span.innerHTML = linebreak(final_transcript);
 	    interim_span.innerHTML = linebreak(interim_transcript);
 	}
 	
@@ -101,17 +101,14 @@ function linebreak(s){
 }
 
 //Filler Words
-function filler(s) {
-
-    /*Add punctionation stripping*/
+/*function filler(s) {
+	
 	var tempSpeech = speech.replace(/[\.,-\/#!$%\^&\*;:{}=\-_`~()]/g,"");
 
 	//Make Array
 	s = s.split(" ");
+	tempSpeech = tempSpeech.toUpperCase();
 	tempSpeech = tempSpeech.split(" ");
-	if(speechIndex >= speech.length){
-		return;
-	}
 	
 	//Find Words
 	for(var i = 0; i < s.length; i++){
@@ -122,40 +119,30 @@ function filler(s) {
 		}
 		
 		//Cases
-		if(s[i].toUpperCase() == tempSpeech[speechIndex].toUpperCase()){
+		if(s[i].toUpperCase() == tempSpeech[speechIndex]){
 			speechIndex ++;
 		}else if(words.indexOf(s[i]) != -1){
-		    s[i] = "<i>" + s[i] + "</i>";
-		    //speechIndex = findNext(s, i);
+		    //Blue
+			s[i] = "<i>" + s[i] + "</i>";
 		}else{
+			//Red
 		    s[i] = "<em>" + s[i] + "</em>";
-		    //speechIndex = findNext(s, i);
+			var match = false;
+			while(match == false){
+				for(var j = i; j < s.length; j++){
+					if(s[j].toUpperCase() == tempSpeech[speechIndex + 1]){
+						alert("HELLO");
+						match = true;
+						speechIndex ++;
+						break;
+					}
+				}
+			}
 		}
 	}
 	
 	return s.join(" ");
-}
-
-//Find Next Match
-function findNext(s, index){
-    
-    //Set to 
-    index = -1;
-
-    //Find Next Index of Match
-    while(index == -1 && speechIndex < speech.length){
-        for (var i = index; i < s.length; i++) {
-            if (s[i] == speech[speechIndex]) {
-                index = i;
-                break;
-            }
-        }
-        speechIndex++;
-    }
-
-    return index;
-}
-
+}*/
 
 //Button Text Change WIP
 function startstoptoggle(){
@@ -170,40 +157,22 @@ function startstoptoggle(){
 	}
 }
 
-
-
-//Frequency Table
-
-/*
-	WIP
-	This function will use two arrays to keep track of how often
-	words are used in the final transcript. 	
-*/
-
-    function freqtable(ftrans) {
-
-        var wordcounts = new Map();
-        var inputwords = "";
-
-        while (i != ftrans.length) {	//Add all words to the frequency table
-            if (ftrans[i] != " ") {	//Build the word to place into array
-                inputword += ftrans[i];
-                ++i;
-            }
-            else {
-                var count;
-                count = wordcounts.get(inputword);
-                if (count) {	//Increment word occurrence
-                    wordcounts.set(inputword, count + 1);
-                }
-                else {	//Add the word with an occurrence of one
-                    wordcounts.set(inputword, 1);
-                }
-                ++i;
-            }
-        }
-
-        //debug
-        console.log(wordcounts.get("hi"));
-
-    }
+//Map Speech
+function mapSpeech(s){
+	
+	var sArr;
+	var wordMap = {};
+	sArr = s;
+	sArr = sArr.replace(/[\.,-\/#!$%\^&\*;:{}=\-_`~()]/g,"");
+	sArr = sArr.split(" ");
+	
+	for(var i = 0; i < sArr.length; i++){
+		if(sArr[i] in wordMap){
+			wordMap[sArr[i]] += 1;
+		}else{
+			wordMap[sArr[i]] = 1;
+		}
+	}
+	
+	console.log(wordMap);
+}
