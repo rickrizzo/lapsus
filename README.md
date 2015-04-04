@@ -1,3 +1,3 @@
 # Lapsus Linguae
 
-A public speaking app that does more than give you tips. Lapsus evaluates speech and provides critical feedback to users so that they can better themselves more effieciently.
+A presentation application that does more than give you tips. Lapsus captures your movements and speech so you can get feedback quickly and easily within the browser!
