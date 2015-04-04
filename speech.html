@@ -1,52 +1,63 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<!--Title-->
-	<title>Lapsus Linguae</title>
+  <!--Title-->
+  <title>Lapsus Linguae</title>
 	
-	<!--CSS-->
-	<!--<link rel="stylesheet" type="text/css" href="resources/css/stylesheet.css">-->
-	<link rel="stylesheet" type="text/css" href="resources/css/textstyles.css">
-  <!--<link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>-->
+  <!--CSS-->
+  <!--<link rel="stylesheet" type="text/css" href="resources/css/stylesheet.css">
+  <link rel="stylesheet" type="text/css" href="resources/css/textstyles.css">
+  <link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'>-->
 </head>
 
 <body>
-	<!--Header-->
+  <!--Header-->
   <header>
-		<h1>Hit the button to begin</h1>
+    <h1>Hit the button to begin</h1>
   </header>
-		
-	<!--Video Recording-->
-	<video id="userMedia" autoplay></video>
-	<br/>
-	<button onclick="requestMedia()">Get Video</button>
+    
+  <div id="main">	
+    
+		<!--Video Recording-->
+    <section id="video">
+      <video id="userMedia" autoplay="true"></video>
+      <br/>
+      <button id="videoStartBtn" onclick="startVideo()">Start Video</button>
+			<button id="videoStopBtn" onclick="stopVideo()">Stop Video</button>
+      <br/>
+      
+      <video id="videoResult" controls="controls"></video>
+      <br/>
+      <button id="captureVideoStart" onclick="startCapture()">Capture</button>
+      <button id="captureVideoStop" onclick="stopCapture()">Stop Capture</button>
+    </section>
+
+    <!--Speech Recognition-->
+    <section id="speech">
+      <div id="results">
+        <span id="final_span" class="final"></span>
+        <span id="interim_span" class="interim"></span>
+      </div>
+      <button id="button" onclick="recognition.start()">Click to start</button>
+      <button id="button" onclick="recognition.stop()">Click to stop</button>
+      <!--<input type="image" class="grow" id = "mic" src="resources/img/microphone.png" title="Click to start!" alt="button" onclick="recognition.start()">-->
+    </section>
+
+    <!--Presentation-->
+    <section id="presentation">
+      <embed src="Sample/Workshop%20Outline.pdf" width="800px" height="1100px">
+    </section>
+  </div>
 	
-	<!--Speech Recognition-->
-	<div id="speech">
-		<div id="results">
-			<span id="final_span" class="final"></span>
-			<span id="interim_span" class="interim"></span>
-		</div>
-		<button id="button" onclick="recognition.start()">Click to start</button>
-    <button id="button" onclick="recognition.stop()">Click to stop</button>
-		<!--<input type="image" class="grow" id = "mic" src="resources/img/microphone.png" title="Click to start!" alt="button" onclick="recognition.start()">-->
-	</div>
+  <!--Footer-->
+  <footer>
+    <p>Created by RCOS and DFA</p>
+  </footer>
 	
-	<!--Transcript-->
-	<section>
-		<p>
-			Happy birthday to you, happy birthday to you
-		</p>
-	</section>
-	
-	<!--Footer-->
-	<footer>
-		<p>Created by RCOS and DFA</p>
-	</footer>
-	
-	<!--Scripts-->
-	<script type="text/javascript" src="resources/js/speech.js"></script>
-	<script type="text/javascript" src="resources/js/video.js"></script>
-	<script type="text/javascript" src="resources/js/jquery-2.1.3.min.js"></script>
+  <!--Scripts-->
+  <script type="text/javascript" src="Resources/JS/whammy.js"></script>
+  <script type="text/javascript" src="resources/js/jquery-2.1.3.min.js"></script>
+  <script type="text/javascript" src="resources/js/speech.js"></script>
+  <script type="text/javascript" src="resources/js/video.js"></script>
 </body>
 </html>
