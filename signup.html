@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+    <title>Lapsus Linguae</title>
+    <link href="resources/css/sstylesheet.css" rel="stylesheet" />
+    <link href='http://fonts.googleapis.com/css?family=Montserrat:400,700' rel='stylesheet' type='text/css'/>
+</head>
+<body>
+    <!--Navigation Bar-->
+    <nav>
+        <ul>
+            <li>Lapsus Linguae</li>
+            <li>Activities</li>
+			<li>
+				<form action="/" method="post" class="container-1">
+                <!--<input type="search" name="search" id="search" placeholder="Search Lessons" />
+                <input type="submit" name="submit" id="submit" value="Search" />-->
+                <input type="search" name="search" id="search" placeholder="Search Lessons..." />
+                </form>
+			</li>
+        </ul>
+    </nav>
+
+    <!--Header-->
+    <header>
+        <h1>Welcome to Lapsus Linguae</h1>
+        <p>Improve your public speaking effortlessly.</p>
+    </header>
+
+    <!--Signup-->
+    <div id ="forms">
+        <div class = "form" id = "register"> 
+            <fieldset>
+                <legend>Register</legend> 
+                        <table>
+                            <form action="signup.php" method="POST">
+                                Username:<input type="text" name="user" required> <br>
+                                Password:<input type="password" name="pass" required> <br>
+                                Email:<input type="email" name="email" required> <br>
+                                <button type = "submit" class = 'btn'><a> Sign Up! </a></button>
+                            </form>
+                        </table> 
+            </fieldset>
+        </div>
+
+        <!--Login-->
+        <div class = "form" id = "login">
+            <fieldset>
+                <legend>Log In</legend> 
+                        <table>
+                            <form action="login.php" method="POST">
+                                Username:<input type="text" name="user" required> <br>
+                                Password:<input type="password" name="pass" required> <br>
+                                <button type = "submit" class = 'btn'><a> Log In! </a></button>
+                            </form>
+                        </table> 
+            </fieldset>
+        </div>
+    </div>
+
+    <!--Quote-->
+    <blockquote cite="https://toddstocker.wordpress.com/">
+        <p>
+            “Improvement is achieved by the ripple effect of a few simple changes in approach, attitude, or habit.” 
+            <footer>
+                - <a href="http://www.turpincommunication.com/our_team.php">Dale Ludwig and Greg Owen-Boger</a>
+            </footer>
+        </p>
+    </blockquote>
+
+</body>
+</html>

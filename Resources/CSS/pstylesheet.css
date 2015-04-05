@@ -7,8 +7,10 @@ body {
 
 /*Text Styling*/
 h1 {
-    font-size: 6em;
+    float: left;
+    font-size: 3em;
     line-height: 0.8em;
+    padding-left: 3%;
 }
 
 h2 {
@@ -46,26 +48,15 @@ nav ul li:hover {
     cursor: pointer;
 }
 
-form{
-    margin: 0;
-    padding: 0;
-    display: inline;
+#avatar img{
+    display: block;
+    margin-left: -13%;
+    padding-top: 1%;
+    float: left;
+    margin-top: 5%;
+    width: 6%;
+    height: 6%;
 }
-
-/*
-input {
-    padding: 1em;
-}
-
-#search { 
-    width: 55%;
-}
-
-#searchbtn {
-    height: 100%;
-    position: relative;
-}
-*/
 
 .container-1{
   width: 52%;
@@ -101,36 +92,10 @@ a{
     color: white;
 }
 
-.btn{
-    display: inline-block;
-    background-color:orangered;
-    padding: 1em 2em;
-    margin: 1em;
-    border-radius: 1.2em;
-}
-
-.btn:hover{
-    color: #f2f195;
-}
-
-blockquote {
-    margin: 0;
-    padding: 3em;
-    font-size: 1.5em;
-    background-color: black;
-    color: white;
-    text-align: center;
-}
-
-blockquote footer{
-    background-color: black;
-    padding: 0;
-
-}
-
-#main {
-    margin: 2em;
-    color: black;
+#chart1{
+    width: 60%;
+    height: 60%;
+    border: 5px solid gray;
 }
 
 button{
@@ -146,8 +111,8 @@ button{
 }
 
 button img{
-    height: 90%;
-    width: 90%;
+    height: 100%;
+    width: 100%;
     border-radius: 100%;
     background-color: white;
     box-shadow: 0 0.1em 1px rgba(142, 142, 142, 0.46);
@@ -159,6 +124,12 @@ footer{
     background-color: #63bbbf;
     color: white;
     font-size: 0.8em;
+}
+
+form{
+    margin: 0;
+    padding: 0;
+    display: inline;
 }
 
 @media screen and (min-width: 900px){

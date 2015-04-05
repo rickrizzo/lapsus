@@ -6,19 +6,10 @@ body {
 }
 
 /*Text Styling*/
+
 h1 {
-    font-size: 6em;
+    font-size: 4em;
     line-height: 0.8em;
-}
-
-h2 {
-    font-size: 2em;
-    line-height: 0.2em; 
-}
-
-strong {
-	font-weight: bold;
-    color: red;
 }
 
 header p{
@@ -52,20 +43,20 @@ form{
     display: inline;
 }
 
-/*
-input {
-    padding: 1em;
+#forms{
+    padding-left: 25%;
 }
 
-#search { 
-    width: 55%;
+.form{
+    padding-right: 5%;
+    padding-bottom: 2%;
+    width: 30%;
+    display: inline-block;
 }
 
-#searchbtn {
-    height: 100%;
-    position: relative;
-}
-*/
+/*#forms fieldset{
+    height: 200px;
+}*/
 
 .container-1{
   width: 52%;
@@ -107,9 +98,13 @@ a{
     padding: 1em 2em;
     margin: 1em;
     border-radius: 1.2em;
+    font-family: Montserrat;
+    cursor: pointer;
+    font-size: 0.8em;
+    border-style: none;
 }
 
-.btn:hover{
+.btn:hover a{
     color: #f2f195;
 }
 
@@ -131,26 +126,6 @@ blockquote footer{
 #main {
     margin: 2em;
     color: black;
-}
-
-button{
-    position:fixed;
-    bottom: 2em;
-    right: 2em;
-    height: 7em;
-    width: 7em;
-    padding: 0.5em;
-    background-color:transparent;
-    border: 0 solid black;
-    margin: 1em;
-}
-
-button img{
-    height: 90%;
-    width: 90%;
-    border-radius: 100%;
-    background-color: white;
-    box-shadow: 0 0.1em 1px rgba(142, 142, 142, 0.46);
 }
 
 footer{
