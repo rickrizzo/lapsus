@@ -18,18 +18,19 @@
     
   <div id="main">	
     
-		<!--Video Recording-->
+		<!--Video-->
     <section id="video">
+      <!--Video Feed-->
       <video id="userMedia" autoplay="true"></video>
       <br/>
-      <button id="videoStartBtn" onclick="startVideo()">Start Video</button>
-			<button id="videoStopBtn" onclick="stopVideo()">Stop Video</button>
+      <!--<button id="videoStartBtn" onclick="startVideo()">Start Video</button>
+			<button id="videoStopBtn" onclick="stopVideo()">Stop Video</button>-->
       <br/>
-      
+      <!--Recorded Video-->
       <video id="videoResult" controls="controls"></video>
       <br/>
-      <button id="captureVideoStart" onclick="startCapture()">Capture</button>
-      <button id="captureVideoStop" onclick="stopCapture()">Stop Capture</button>
+      <!--<button id="captureVideoStart" onclick="startCapture()">Capture</button>
+      <button id="captureVideoStop" onclick="stopCapture()">Stop Capture</button>-->
     </section>
 
     <!--Speech Recognition-->
@@ -38,8 +39,8 @@
         <span id="final_span" class="final"></span>
         <span id="interim_span" class="interim"></span>
       </div>
-      <button id="button" onclick="recognition.start()">Click to start</button>
-      <button id="button" onclick="recognition.stop()">Click to stop</button>
+      <button id="button" onclick="startPresentation()">Click to start</button>
+      <button id="button" onclick="stopPresentation()">Click to stop</button>
       <!--<input type="image" class="grow" id = "mic" src="resources/img/microphone.png" title="Click to start!" alt="button" onclick="recognition.start()">-->
     </section>
 
@@ -65,20 +66,12 @@
 		<!--<input type="image" class="grow" id = "mic" src="resources/img/microphone.png" title="Click to start!" alt="button" onclick="recognition.start()">-->
 	</div>
 	
-	
 	<!--Stopwatch-->
 	<div class="stopwatch">
 		<button id="timerStart">Start Timer</button>
 		<button id="timerStop">Stop Timer</button>
 		<button id="timerReset">Reset Timer</button>
 	</div>
-	
-	<!--Transcript-->
-	<section>
-		<p>
-			Happy birthday to you, happy birthday to you
-		</p>
-	</section>
 	
   <!--Footer-->
   <footer>
@@ -87,10 +80,11 @@
 	
   <!--Scripts-->
   <script type="text/javascript" src="Resources/JS/whammy.js"></script>
-  <script type="text/javascript" src="resources/js/jquery-2.1.3.min.js"></script>
-  <script type="text/javascript" src="resources/js/speech.js"></script>
-  <script type="text/javascript" src="resources/js/video.js"></script>
-	<script type="text/javascript" src="resources/js/stopwatch.js"></script>
+  <script type="text/javascript" src="Resources/JS/jquery-2.1.3.min.js"></script>
+  <script type="text/javascript" src="Resources/JS/speech.js"></script>
+  <script type="text/javascript" src="Resources/JS/video.js"></script>
+	<script type="text/javascript" src="Resources/JS/stopwatch.js"></script>
+  <script type="text/javascript" src="Resources/JS/capture.js"></script>
 
 </body>
 </html>
