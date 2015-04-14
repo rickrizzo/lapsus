@@ -55,6 +55,18 @@
 	<br/>
 	<button onclick="requestMedia()">Get Video</button>
 	
+	<!--Audio Visualization Rip-->
+	<div id="viz">
+		<canvas id="analyser" width="0" height="0"></canvas>
+		<canvas id="wavedisplay" width="0" height="0"></canvas>
+	</div>
+	
+	<!--Audio Recording -->
+	<div id="controls">
+		<button id="record" onclick="toggleRecording(this);">Toggle Recording</button>
+		<a id="save" href="#">Save Audio</a>
+	</div>
+	
 	<!--Speech Recognition-->
 	<div id="speech">
 		<div id="results">
@@ -85,6 +97,9 @@
   <script type="text/javascript" src="Resources/JS/video.js"></script>
 	<script type="text/javascript" src="Resources/JS/stopwatch.js"></script>
   <script type="text/javascript" src="Resources/JS/capture.js"></script>
-
+	<script type="text/javascript" src="Resources/JS/main.js"></script>
+	<script type="text/javascript" src="Resources/JS/recorder.js"></script>
+	<script type="text/javascript" src="Resources/JS/audiodisplay.js"></script>
+	
 </body>
 </html>
