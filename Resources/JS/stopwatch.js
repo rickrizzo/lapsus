@@ -1,12 +1,7 @@
-/* Thanks to maček from stackoverflow */
-
 //Stopwatch Template from Stack Overflow
-var Stopwatch = function(elem, options) {
+var Stopwatch = function (elem, options) {
 
-  var timer       = createTimer(),
-      offset,
-      clock,
-      interval;
+  var timer = createTimer(), offset, clock, interval;
 
   // default options
   options = options || {};
@@ -24,8 +19,8 @@ var Stopwatch = function(elem, options) {
   reset();
 	
 	// use onclick events for buttons instead of javascript buttons.
-	document.getElementById("timerStart").onclick = start;
-	document.getElementById("timerStop").onclick = stop;
+	document.getElementById("start").onclick = start;
+	document.getElementById("stop").onclick = stop;
 	document.getElementById("timerReset").onclick = reset;
 	
   // private functions
@@ -68,34 +63,30 @@ var Stopwatch = function(elem, options) {
     render();
   }
 
-  function render() {
-						
-			var hours;
-			var	minutes;
-			var	seconds;
-					
-		  // calculate hours                
-      hours = parseInt(clock / 1000 / 60 / 60);
+  function render() {				
+		var hours;
+		var	minutes;
+		var	seconds;
+			
+		// calculate hours                
+    hours = parseInt(clock / 1000 / 60 / 60);
             
-      // calculate minutes
-      minutes = parseInt(clock / 1000 / 60);
-      if (minutes >= 60) minutes %= 60;
+    // calculate minutes
+    minutes = parseInt(clock / 1000 / 60);
+    if (minutes >= 60) minutes %= 60;
             
-			// calculate seconds
-			seconds = parseInt(clock / 1000);
-			if (seconds >= 60) seconds %= 60;
+		// calculate seconds
+		seconds = parseInt(clock / 1000);
+		if (seconds >= 60) seconds %= 60;
 			
-			// calculate double-digits
-			
-			
-			var finaltime = hours + ':' + minutes + '::' + seconds;
+		// calculate double-digits	
+		var finaltime = hours + ':' + minutes + ':' + seconds;
 		
-			timer.innerHTML = finaltime; 
+		timer.innerHTML = finaltime; 
   }
 
   function delta() {
-    var now = Date.now(),
-        d   = now - offset;
+    var now = Date.now(), d = now - offset;
 
     offset = now;
     return d;

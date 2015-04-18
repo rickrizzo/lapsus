@@ -1,14 +1,17 @@
+/*Start all recoding functions with a singular function call*/
+
 //Start Presentation Capture
 function startPresentation() {
   "use strict";
-  recognition.start();
-  startVideo();
-  startCapture();
+  recognition.start(); //Start speech to text
+  startVideo(); //Start video stream
+  startCapture(); //Sart video recording
 }
 
+//Stop Presentation Capture
 function stopPresentation() {
   "use strict";
-  recognition.stop();
-  stopCapture();
-  stopVide();
+  recognition.stop(); //Start speech to text
+  stopCapture(); //Stop video capture
+  stopVideo(); //Stop video stream
 }

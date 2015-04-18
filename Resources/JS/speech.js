@@ -100,7 +100,7 @@ if (!('webkitSpeechRecognition' in window)) {
     document.getElementById("interim_span").innerHTML = linebreak(interim_transcript);
     transcript = final_transcript;
 	};
-	22
+	
 	//On Error
 	recognition.onerror = function (event) {
     "use strict";

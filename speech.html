@@ -18,6 +18,13 @@
     
   <div id="main">	
     
+    <!--Stopwatch-->
+	  <div class="stopwatch">
+		  <button id="timerStart">Start Timer</button>
+		  <button id="timerStop">Stop Timer</button>
+		  <!--<button id="timerReset">Reset Timer</button>-->
+    </div>
+    
 		<!--Video-->
     <section id="video">
       <!--Video Feed-->
@@ -39,39 +46,19 @@
         <span id="final_span" class="final"></span>
         <span id="interim_span" class="interim"></span>
       </div>
-      <button id="button" onclick="startPresentation()">Click to start</button>
-      <button id="button" onclick="stopPresentation()">Click to stop</button>
       <!--<input type="image" class="grow" id = "mic" src="resources/img/microphone.png" title="Click to start!" alt="button" onclick="recognition.start()">-->
     </section>
 
     <!--Presentation-->
     <section id="presentation">
-      <embed src="Sample/Workshop%20Outline.pdf" width="800px" height="1100px">
+      <!--PDF Viewer-->
+      <!--<embed src="Sample/Workshop%20Outline.pdf" width="800px" height="1100px">-->
     </section>
+    
+    <!--Start and Stop Presentation-->
+    <button id="start" onclick="startPresentation()">Click to start</button>
+    <button id="stop" onclick="stopPresentation()">Click to stop</button>
   </div>
-		
-	<!--Video Recording-->
-	<video id="userMedia" autoplay></video>
-	<br/>
-	<button onclick="requestMedia()">Get Video</button>
-	
-	<!--Speech Recognition-->
-	<div id="speech">
-		<div id="results">
-			<span id="final_span" class="final"></span>
-			<span id="interim_span" class="interim"></span>
-		</div>
-		<button id="button" onclick="recognition.start()">Click to start</button>
-    <button id="button" onclick="recognition.stop()">Click to stop</button>
-		<!--<input type="image" class="grow" id = "mic" src="resources/img/microphone.png" title="Click to start!" alt="button" onclick="recognition.start()">-->
-	</div>
-	
-	<!--Stopwatch-->
-	<div class="stopwatch">
-		<button id="timerStart">Start Timer</button>
-		<button id="timerStop">Stop Timer</button>
-		<button id="timerReset">Reset Timer</button>
-	</div>
 	
   <!--Footer-->
   <footer>
