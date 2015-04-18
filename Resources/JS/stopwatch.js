@@ -1,109 +1,50 @@
-//Stopwatch Template from Stack Overflow
-var Stopwatch = function (elem, options) {
+var h4 = document.getElementsByTagName('h4')[0],
+    start = document.getElementById('start'),
+    stop = document.getElementById('stop'),
+    clear = document.getElementById('clear'),
+    seconds = 0, minutes = 0, hours = 0,
+    t;
 
-  var timer = createTimer(), offset, clock, interval;
-
-  // default options
-  options = options || {};
-  options.delay = options.delay || 1;
-
-  // append elements     
-  elem.appendChild(timer);
-	/*
-  elem.appendChild(startButton);    
-  elem.appendChild(stopButton);
-  elem.appendChild(resetButton);
-	*/
-
-  // initialize
-  reset();
-	
-	// use onclick events for buttons instead of javascript buttons.
-	document.getElementById("start").onclick = start;
-	document.getElementById("stop").onclick = stop;
-	document.getElementById("timerReset").onclick = reset;
-	
-  // private functions
-  function createTimer() {
-    return document.createElement("span");
-  }
-
-  function createButton(action, handler) {
-    var a = document.createElement("a");
-    a.href = "#" + action;
-    a.innerHTML = action;
-    a.addEventListener("click", function(event) {
-      handler();
-      event.preventDefault();
-    });
-    return a;
-  }
-
-  function start() {
-    if (!interval) {
-      offset   = Date.now();
-      interval = setInterval(update, options.delay);
+function add() {
+    seconds++;
+    if (seconds >= 60) {
+        seconds = 0;
+        minutes++;
+        if (minutes >= 60) {
+            minutes = 0;
+            hours++;
+        }
     }
-  }
+    
+    h4.textContent = (hours ? (hours > 9 ? hours : "0" + hours) : "00") + ":" 
+      + (minutes ? (minutes > 9 ? minutes : "0" + minutes) : "00") + ":" 
+      + (seconds > 9 ? seconds : "0" + seconds);
 
-  function stop() {
-    if (interval) {
-      clearInterval(interval);
-      interval = null;
-    }
-  }
-
-  function reset() {
-    clock = 0;
-    render();
-  }
-
-  function update() {
-    clock += delta();
-    render();
-  }
-
-  function render() {				
-		var hours;
-		var	minutes;
-		var	seconds;
-			
-		// calculate hours                
-    hours = parseInt(clock / 1000 / 60 / 60);
-            
-    // calculate minutes
-    minutes = parseInt(clock / 1000 / 60);
-    if (minutes >= 60) minutes %= 60;
-            
-		// calculate seconds
-		seconds = parseInt(clock / 1000);
-		if (seconds >= 60) seconds %= 60;
-			
-		// calculate double-digits	
-		var finaltime = hours + ':' + minutes + ':' + seconds;
-		
-		timer.innerHTML = finaltime; 
-  }
-
-  function delta() {
-    var now = Date.now(), d = now - offset;
-
-    offset = now;
-    return d;
-  }
-	
-	function getTime() {
-		return clock;
-	}
-
-  // public API
-  this.start  = start;
-  this.stop   = stop;
-  this.reset  = reset;
-};
-
-var elems = document.getElementsByClassName("stopwatch");
-
-for (var i=0, len=elems.length; i<len; i++) {
-  new Stopwatch(elems[i]);
+    timer();
 }
+
+function timer() {
+    t = setTimeout(add, 1000);
+}
+
+//timer(); //Removed auto start
+
+
+/* Start button */
+//start.onclick = timer;
+function startTimer () {
+  timer();
+}
+
+/* Stop button */
+//stop.onclick = function() {
+function stopTimer() {
+    clearTimeout(t);
+}
+
+/* Clear button */
+//Not used by our application
+/*clear.onclick = function() {
+    h4.textContent = "00:00:00";
+    seconds = 0; minutes = 0; hours = 0;
+}*/

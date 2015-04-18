@@ -120,7 +120,6 @@ function nextFrame() {
 
 function startCapture() {
   "use strict";
-  window.alert("Your video is recording. Please be patient");
   initSize();
   capturing = true;
   startTime = new Date().getTime();
