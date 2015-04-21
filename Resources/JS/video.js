@@ -27,6 +27,7 @@ var msgdiv;
 var progress;
 var startButton;
 var stopButton;
+var frameRate = 24;
 var hdConstraints = {
   video: {
     mandatory: {
@@ -124,6 +125,7 @@ function nextFrame() {
   }
 }
 
+//Begin Video Capture
 function startCapture() {
   "use strict";
   initSize();
@@ -132,6 +134,7 @@ function startCapture() {
   nextFrame();
 }
 
+//End Video Capture
 function stopCapture() {
   "use strict";
   capturing = false;
