@@ -25,6 +25,8 @@ function stopPresentation() {
   WPM(speech, time);
 }
 
+/*********************************ANALYTICS***************************************/
+
 //Calculate Words Per Minute
 function WPM(speech, time) {
   var speechArr = speech.split(" ");
@@ -32,5 +34,6 @@ function WPM(speech, time) {
   var minutes = timeArr[1] + 
       (60 * timeArr[0]) + 
       (timeArr[2] /  60);
-  console.log(speechArr.length / minutes);
+  //console.log(speechArr.length / minutes);
+  document.getElementById("WPM").innerHTML = "Words Per Minute: " + speechArr.length / minutes;
 }

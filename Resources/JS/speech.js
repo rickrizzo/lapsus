@@ -21,6 +21,7 @@ function linebreak(s) {
 
 //Check Filler Words
 function checkFillers() {
+  
   //Variables
   var i, j;
   var speech = final_transcript;
@@ -29,6 +30,13 @@ function checkFillers() {
   speech = speech.split(" ");
   
   for (i = 0; i < speech.length; i += 1) {
+    
+    //Map Words
+    if (speech[i] in wordMap) {
+      wordMap[speech[i]] += 1;
+    } else {
+      wordMap[speech[i]] = 1;
+    }
     
     //Check Words
     for (j = 0; j < fillerWords.length; j += 1) {
@@ -41,14 +49,11 @@ function checkFillers() {
       } 
     }
     
-    //Map Words
-    if (speech[i] in wordMap) {
-      wordMap[speech] += 1;
-    } else {
-      wordMap[speech] = 0;
-    }
+
   }
   
+  //Output
+  document.getElementById("wordMap").innerHTML = JSON.stringify(wordMap);
   document.getElementById("final_span").innerHTML = speech.join(" ");
 }
 
