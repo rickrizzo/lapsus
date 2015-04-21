@@ -27,6 +27,14 @@ var msgdiv;
 var progress;
 var startButton;
 var stopButton;
+var hdConstraints = {
+  video: {
+    mandatory: {
+      minWidth: 1280,
+      minHeight: 720
+    }
+  }
+};
 
 //Initialize Variables
 function init() {
@@ -58,10 +66,7 @@ var errCallback = function (e) {
 function startVideo() {
   "use strict";
   init();
-	navigator.getUserMedia({
-    video: true,
-    audio: false
-  }, function (stream) {
+	navigator.getUserMedia(hdConstraints, function (stream) {
     video.src = window.URL.createObjectURL(stream);
   }, errCallback);
 }
