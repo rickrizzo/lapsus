@@ -42,7 +42,7 @@ function init() {
   video = document.getElementById('userMedia');
   canvas = document.createElement('canvas');
   ctx = canvas.getContext('2d');
-  result = document.getElementById('videoResult');
+  //result = document.getElementById('videoResult');
   startButton = document.getElementById("videoStartBtn");
   stopButton = document.getElementById("videoStopBtn");
 }
@@ -92,7 +92,8 @@ function encodeVideo(capture, currentImage) {
     //Finished
     window.alert("Your video is finished");
     var output = capture.compile();
-    result.src = window.URL.createObjectURL(output);
+    video.src = window.URL.createObjectURL(output);
+    console.log(video.src);
     images = [];
   }
 }
