@@ -11,6 +11,7 @@ function startPresentation() {
   startVideo(); //Start video stream
   startCapture(); //Sart video recording
   startTimer(); //Start Timer
+  startAudio();
 }
 
 //Stop Presentation Capture
@@ -20,6 +21,7 @@ function stopPresentation() {
   stopCapture(); //Stop video capture
   stopVideo(); //Stop video stream
   stopTimer(); //Stop Timer
+  stopAudio();
   speech = document.getElementById("final_span").innerHTML;
   time = document.getElementsByTagName("h4")[0].textContent;
   WPM(speech, time);
