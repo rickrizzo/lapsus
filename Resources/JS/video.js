@@ -139,3 +139,11 @@ function stopCapture() {
   "use strict";
   capturing = false;
 }
+
+//Post Video to Server
+function saveVideo(videoblob){
+  var data = {};
+  data.video = videoblob;
+  data.metadata = 'test metadata';
+  data.action = "save";
+}
