@@ -13,16 +13,10 @@ var outputElement = document.getElementById('output');
 var outputString;
 
 // feature detection 
-if (!navigator.getUserMedia)
+/*if (!navigator.getUserMedia){
     navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia ||
                   navigator.mozGetUserMedia || navigator.msGetUserMedia;
-
-if (navigator.getUserMedia){
-    navigator.getUserMedia({audio:true}, success, function(e) {
-    alert('Error capturing audio.');
-    });
-} else alert('getUserMedia not supported in this browser.');
-
+}*/
 
 /*
 	Repurposed activation from key-presses to link with capture.js 
@@ -30,11 +24,21 @@ if (navigator.getUserMedia){
 */
 // --------------------------------------------START AUDIO 
 function startAudio() {
-		recording = true;
-		// reset the buffers for the new recording
-		leftchannel.length = rightchannel.length = 0;
-		recordingLength = 0;
-		outputElement.innerHTML = 'Recording now...';
+  //Capture Audio
+  if (navigator.getUserMedia){
+      navigator.getUserMedia({audio:true}, success, function(e) {
+        alert('Error capturing audio.');
+      });
+  } else {
+    alert('getUserMedia not supported in this browser.');
+  }
+
+  recording = true;
+	// reset the buffers for the new recording
+  
+  leftchannel.length = rightchannel.length = 0;
+	recordingLength = 0;
+	outputElement.innerHTML = 'Recording now...';
 }
 		
 // --------------------------------------------STOP AUDIO				
