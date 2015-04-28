@@ -10,11 +10,11 @@
 	VALUES('$First','$Last', '$email', '$pass')";
 	$mysqli->query($newuser) or die(mysqli_error($conn));
 	//$conn->exec($newuser);
-	$usertable = "CREATE TABLE IF NOT EXISTS " . $user . "(
+	/*$usertable = "CREATE TABLE IF NOT EXISTS " . $email . "(
 	`id` int(11) NOT NULL,
   	`src` varchar(255) NOT NULL
 	) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4";
-	$modtable= "ALTER TABLE " . $user . "
+	$modtable= "ALTER TABLE " . $email . "
  	ADD PRIMARY KEY (`id`);";
 	$mysqli->query($usertable) or die(mysqli_error($mysqli));
 	$mysqli->query($modtable) or die(mysqli_error($mysqli));
@@ -56,7 +56,7 @@
 	if (!copy($edit_info, $new_editinfo)) {
     	echo "failed to copy $edit_info...\n";
 	}
-	copy($edit_info, $new_editinfo);
-	header("location: index.php");
+	copy($edit_info, $new_editinfo);*/
+	header("location: index.html");
 	mysql_close($conn);
 	?>
