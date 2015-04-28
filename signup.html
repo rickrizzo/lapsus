@@ -35,12 +35,29 @@
             <fieldset>
                 <legend>Register</legend> 
                         <table>
-                            <form action="signup.php" method="POST">
-                                Username:<input type="text" name="user" required> <br>
-                                Password:<input type="password" name="pass" required> <br>
-                                Email:<input type="email" name="email" required> <br>
-                                <button type = "submit" class = 'btn'><a> Sign Up! </a></button>
+                            <form action="signup.php" method="POST" onsubmit="return checkPW()">
+								First Name:<input type="text" name="First" id="First" required> <br />
+                                Last Name:<input type="text" name="Last" id="Last" required> <br />
+                                Email:<input type="email" name="email" id="email" required> <br />
+                                Password:<input type="password" name="pass" id="pass" required> <br />
+								Password*<input type="password" name="pass2" id="pass2" onchange="checkPW()" required> <br />
+                                <button type = "submit" class='btn'>Sign Up!</button>
                             </form>
+							<script>
+							function checkPW()
+							{
+								var pass = document.getElementById("pass").value;
+								var pass2 = document.getElementById("pass2").value;
+								var ok = true;
+								if(pass != pass2)
+								{
+									document.getElementById("pass").style.borderColor = "#E34234";
+									document.getElementById("pass2").style.borderColor = "#E34234";
+									ok = false;
+								}	
+								return ok;
+							}
+						</script>
                         </table> 
             </fieldset>
         </div>
