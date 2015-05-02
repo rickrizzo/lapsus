@@ -92,6 +92,7 @@ function startVideo() {
 function stopVideo(e) {
   "use strict";
   mediaRecorder.stop();
+  /*Save to database code goes here*/
 	video.src = blobURL;
 }
 
