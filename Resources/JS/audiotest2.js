@@ -172,7 +172,7 @@ function success(e){
         leftchannel.push (new Float32Array (left));
         rightchannel.push (new Float32Array (right));
         recordingLength += bufferSize;
-        console.log('recording');
+        //console.log('recording');
     }
 
     // we connect the recorder
