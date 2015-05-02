@@ -27,13 +27,122 @@
         <h1>Hello, User!</h1>
     </header>
 
-    <div id="avatar">
-        <img src="resources/img/avatar.png" alt="Edit" />
-    </div>
-
     <!--Main Body-->
+    <style type="text/css">
+        #ProfilePage
+        {
+            /* Move it off the top of the page, then centre it horizontally */
+            margin: 50px auto;
+            width: 750px;
+
+        /* For visibility. Delete me */
+        border: 1px solid red;
+        }
+
+        #LeftCol
+        {
+            /* Move it to the left */
+            float: left;
+
+            width: 250px;
+            text-align: center;
+
+            /* Move it away from the content */
+            margin-right: 20px;
+
+        /* For visibility. Delete me */
+        border: 1px solid brown;
+        }
+
+        #Photo
+        {
+            /* Width and height of photo container */
+            width: 250px;
+            height: 250px;
+
+        /* For visibility. Delete me */
+        border: 1px solid green;
+        }
+
+        #PhotoOptions
+        {
+            text-align: center;
+            width: 250px;
+
+        /* For visibility. Delete me */
+        border: 1px solid brown;
+        }
+
+        #Info
+        {
+            width: 400px;
+            text-align: center;
+
+            /* Move it to the right */
+            float: right;
+
+        /* For visibility. Delete me */
+        border: 1px solid blue;
+        }
+
+        #Info strong
+        {
+            /* Give it a width */
+            display: inline-block;
+            width: 125x;
+
+        /* For visibility. Delete me */
+        border: 1px solid orange;
+        }
+
+        #Info span
+        {
+            /* Give it a width */
+            display: inline-block;
+            width: 250px;
+
+        /* For visibility. Delete me */
+        border: 1px solid purple;
+        }
+        </style>
         <div id="chart1">
             <p>Here's a chart of your progress!</p>
+
+            <div id="ProfilePage">
+                <div id="LeftCol">
+                    <div id="Photo"> 
+        <img src="resources/img/avatar.png" alt="Edit" />
+    </div>
+                    <div id="ProfileOptions">
+                    Snoop Dogg
+                    </div>
+                </div>
+
+                <div id="Info">
+                    <p>
+                        <strong>DOB</strong>
+                        <span>1/19/2015</span>
+                    </p>
+                    <p>
+                        <strong>Joined:</strong>
+                        <span>4/21/2015</span>
+                    </p>
+                    <p>
+                        <strong>Achievements:</strong>
+                        <span>'Welcome to Lapsus'</span>
+                    </p>
+                    <p>
+                        <strong>info_</strong>
+                        <span>data_</span>
+                    </p>
+                    <p>
+                        <strong>info_</strong>
+                        <span>data_</span>
+                    </p>
+                </div>
+            <!-- Needed because other elements inside ProfilePage have floats -->
+            <div style="clear:both"></div>
+        </div>
         </div>
     
     <!--
