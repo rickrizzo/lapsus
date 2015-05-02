@@ -1,14 +1,14 @@
 //Check Correct Vender Prefix
 window.URL = window.URL || window.webkitURL;
 navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.ms.GetUserMedia;
-window.requestAnimationFrame = (function () {
+/*window.requestAnimationFrame = (function () {
   "use strict";
   return window.requestAnimationFrame       ||
          window.webkitRequestAnimationFrame ||
          window.mozRequestAnimationFrame    ||
          window.oRequestAnimationFrame      ||
          window.msRequestAnimationFrame
-    })();
+    })();*/
 
 
 //Variables
@@ -36,6 +36,8 @@ var hdConstraints = {
     }
   }
 };
+var blobURL;
+var mediaRecorder;
 
 //Initialize Variables
 function init() {
@@ -66,13 +68,14 @@ var errCallback = function (e) {
 //Recording Success
 var recordSuccess = function (stream) {
   video.src = window.URL.createObjectURL(stream);
-  /*var mediaRecorder = new MediaStreamRecorder(stream);
+  mediaRecorder = new MediaStreamRecorder(stream);
   mediaRecorder.mimeType = 'video/webm';
   mediaRecorder.ondataavailable = function(blob){
-    var blobURL = URL.createObjectURL(blob);
+    blobURL = URL.createObjectURL(blob);
+    console.log(blobURL);
     //document.write('<a href="' + blobURL + '">VIDEO</a>');
   };
-  mediaRecorder.start(3000);*/
+  mediaRecorder.start(10*60*1000); //Sets A Limit of 10 Minutes
 };
 
 //Access Webcam
@@ -88,11 +91,27 @@ function startVideo() {
 //Stop Webcam Access
 function stopVideo(e) {
   "use strict";
-	video.src = '';
+  mediaRecorder.stop();
+	video.src = blobURL;
+}
+
+//Begin Video Capture
+function startCapture() {
+  "use strict";
+  //initSize();
+  capturing = true;
+  //startTime = new Date().getTime();
+  //nextFrame();
+}
+
+//End Video Capture
+function stopCapture() {
+  "use strict";
+  capturing = false;
 }
 
 //Encode Video
-function encodeVideo(capture, currentImage) {
+/*function encodeVideo(capture, currentImage) {
   "use strict";
   if (currentImage < images.length) {
     ctx.putImageData(images[currentImage].datas, 0, 0);
@@ -110,18 +129,18 @@ function encodeVideo(capture, currentImage) {
     console.log(video.src);
     images = [];
   }
-}
+}*/
 
 //Finalize Video
-function finalizeVideo() {
+/*function finalizeVideo() {
   "use strict";
   var capture = new Whammy.Video();
   //showProgress(false);
   encodeVideo(capture, 0);
-}
+}*/
 
 //Capture Video
-function nextFrame() {
+/*function nextFrame() {
 	"use strict";
 	if (capturing) {
 		var imageData;
@@ -136,19 +155,4 @@ function nextFrame() {
 	} else {
     window.requestAnimationFrame(finalizeVideo);
   }
-}
-
-//Begin Video Capture
-function startCapture() {
-  "use strict";
-  initSize();
-  capturing = true;
-  startTime = new Date().getTime();
-  nextFrame();
-}
-
-//End Video Capture
-function stopCapture() {
-  "use strict";
-  capturing = false;
-}
+}*/
