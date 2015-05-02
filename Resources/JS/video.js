@@ -63,13 +63,26 @@ var errCallback = function (e) {
 	window.console.log("Error: ", e);
 };
 
+//Recording Success
+var recordSuccess = function (stream) {
+  video.src = window.URL.createObjectURL(stream);
+  /*var mediaRecorder = new MediaStreamRecorder(stream);
+  mediaRecorder.mimeType = 'video/webm';
+  mediaRecorder.ondataavailable = function(blob){
+    var blobURL = URL.createObjectURL(blob);
+    //document.write('<a href="' + blobURL + '">VIDEO</a>');
+  };
+  mediaRecorder.start(3000);*/
+};
+
 //Access Webcam
 function startVideo() {
   "use strict";
   init();
-	navigator.getUserMedia(hdConstraints, function (stream) {
-    video.src = window.URL.createObjectURL(stream);
-  }, errCallback);
+	navigator.getUserMedia(
+    hdConstraints, 
+    recordSuccess, 
+    errCallback);
 }
 
 //Stop Webcam Access
@@ -138,12 +151,4 @@ function startCapture() {
 function stopCapture() {
   "use strict";
   capturing = false;
-}
-
-//Post Video to Server
-function saveVideo(videoblob){
-  var data = {};
-  data.video = videoblob;
-  data.metadata = 'test metadata';
-  data.action = "save";
 }
