@@ -41,9 +41,13 @@ var blobURL;
 var mediaRecorder;
 var fileType = 'video';
 var fileName = 'TEST.webm';
+var formData = new FormData();
+formData.append(fileType + "-filename", fileName);
+formData.append(fileType, "-blob", blobURL);
 
 //Save Video
 function saveVideo(url, data){
+  "use strict"
   var request = new XMLHttpRequest();
   request.onreadystatechange = function () {
     if (request.readyState == 4 && request.status == 200) {

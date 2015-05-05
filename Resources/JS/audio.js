@@ -38,7 +38,7 @@ function startAudio() {
   
   leftchannel.length = rightchannel.length = 0;
 	recordingLength = 0;
-	outputElement.innerHTML = 'Recording now...';
+	//outputElement.innerHTML = 'Recording now...';
 }
 		
 // --------------------------------------------STOP AUDIO				
@@ -94,10 +94,11 @@ function stopAudio() {
 					access an empty link on the page and set it to the blob DL
 				*/
         // let's save it locally
-        outputElement.innerHTML = 'Handing off the file now...';
+        //outputElement.innerHTML = 'Handing off the file now...';
         var url = (window.URL || window.webkitURL).createObjectURL(blob);
         var link = document.getElementById('audiolink');
         link.href = url;
+        link.innerHTML = "Download Audio";
         link.download = 'output.wav';
         var click = document.createEvent("Event");
         click.initEvent("click", true, true);
