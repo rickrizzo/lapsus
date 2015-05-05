@@ -13,6 +13,7 @@ navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia 
 
 //Variables
 var video;
+var result;
 var width;
 var height;
 var canvas;
@@ -38,16 +39,32 @@ var hdConstraints = {
 };
 var blobURL;
 var mediaRecorder;
+var fileType = 'video';
+var fileName = 'TEST.webm';
+
+//Save Video
+function saveVideo(url, data){
+  var request = new XMLHttpRequest();
+  request.onreadystatechange = function () {
+    if (request.readyState == 4 && request.status == 200) {
+      window.console.log(location.href + request.responseText);
+    }
+  };
+  request.open('POST', url);
+  request.send(data);
+}
 
 //Initialize Variables
 function init() {
 	"use strict";
   video = document.getElementById('userMedia');
+  result = document.getElementById('videoResult');
   canvas = document.createElement('canvas');
   ctx = canvas.getContext('2d');
-  //result = document.getElementById('videoResult');
   startButton = document.getElementById("videoStartBtn");
   stopButton = document.getElementById("videoStopBtn");
+  result.style.display = "none";
+  video.style.display = "initial";
 }
 
 //Initialize Canvas Size
@@ -93,7 +110,10 @@ function stopVideo(e) {
   "use strict";
   mediaRecorder.stop();
   /*Save to database code goes here*/
-	video.src = blobURL;
+	//video.src = blobURL;
+  video.style.display = "none";
+  result.style.display = "initial";
+  result.src = blobURL;
 }
 
 //Begin Video Capture
