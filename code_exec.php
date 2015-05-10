@@ -1,4 +1,6 @@
 <?php
+	/*This code executes the connection made in connection.php and assigns each php variable to the corresponding
+	HTML variable. Then it's inserted into the Users table*/
 	require_once 'config.php';
 	require 'connection.php';
 	$fname=$_POST['First'];
