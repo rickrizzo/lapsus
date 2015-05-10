@@ -1,15 +1,16 @@
 <?php
-	session_start();
-	require_once 'config.php';
+	session_start(); //starts session, duh 
+	require_once 'config.php'; 
 	require 'connection.php';
-	$First=mysql_real_escape_string($_POST['First']);
-	$Last=mysql_real_escape_string($_POST['Last']);
+	$First=mysql_real_escape_string($_POST['First']); //by using mysql_real_escape_string you escape any special characters in the string
+	$Last=mysql_real_escape_string($_POST['Last']); 
 	$email=mysql_real_escape_string($_POST['email']);
 	$pass=mysql_real_escape_string($_POST['pass']);
-	$newuser = "INSERT INTO Users (First, Last, email, pass)
-	VALUES('$First','$Last', '$email', '$pass')";
-	$mysqli->query($newuser) or die(mysqli_error($conn));
-	//$conn->exec($newuser);
+	$newuser = "INSERT INTO Users (First, Last, email, pass) 
+	VALUES('$First','$Last', '$email', '$pass')"; 
+	$mysqli->query($newuser) or die(mysqli_error($conn)); //the query is executed meaning the values from the sql variables taken from the html form are inserted into the Users table and into corresponding place
+	$conn->exec($newuser); 
+	//Code below creates a file directory for users
 	/*$usertable = "CREATE TABLE IF NOT EXISTS " . $email . "(
 	`id` int(11) NOT NULL,
   	`src` varchar(255) NOT NULL
@@ -57,6 +58,6 @@
     	echo "failed to copy $edit_info...\n";
 	}
 	copy($edit_info, $new_editinfo);*/
-	header("location: index.html");
+	header("location: index.html"); //once signed up, brings user back to index page
 	mysql_close($conn);
 	?>
