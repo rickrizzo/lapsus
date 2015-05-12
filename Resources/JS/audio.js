@@ -1,4 +1,4 @@
-// variables
+// Variables
 var leftchannel = [];
 var rightchannel = [];
 var recorder = null;
@@ -12,7 +12,8 @@ var context = null;
 var outputElement = document.getElementById('output');
 var outputString;
 
-// feature detection 
+// Feature detection 
+//Detect availability of get user media
 /*if (!navigator.getUserMedia){
     navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia ||
                   navigator.mozGetUserMedia || navigator.msGetUserMedia;
@@ -22,7 +23,8 @@ var outputString;
 	Repurposed activation from key-presses to link with capture.js 
 	start and stop presentation calls.
 */
-// --------------------------------------------START AUDIO 
+
+//START AUDIO 
 function startAudio() {
   //Capture Audio
   if (navigator.getUserMedia){
@@ -41,7 +43,7 @@ function startAudio() {
 	//outputElement.innerHTML = 'Recording now...';
 }
 		
-// --------------------------------------------STOP AUDIO				
+//STOP AUDIO				
 function stopAudio() {
         // we stop recording
         recording = false;

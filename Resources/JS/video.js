@@ -1,6 +1,8 @@
 //Check Correct Vender Prefix
 window.URL = window.URL || window.webkitURL;
 navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia || navigator.mozGetUserMedia || navigator.ms.GetUserMedia;
+
+//This was needed for Whammy.js
 /*window.requestAnimationFrame = (function () {
   "use strict";
   return window.requestAnimationFrame       ||
@@ -12,6 +14,7 @@ navigator.getUserMedia = navigator.getUserMedia || navigator.webkitGetUserMedia 
 
 
 //Variables
+//Not all variables are in use
 var video;
 var result;
 var width;
@@ -34,6 +37,7 @@ var hdConstraints = {
     mandatory: {
       minWidth: 640,
       minHeight: 480
+      //HD Resolution
       //minWidth: 1280,
       //minHeight: 720
     }
