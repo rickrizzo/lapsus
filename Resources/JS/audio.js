@@ -46,7 +46,7 @@ function stopAudio() {
         // we stop recording
         recording = false;
         
-        outputElement.innerHTML = 'Building wav file...';
+        //outputElement.innerHTML = 'Building wav file...';
 
         // we flat the left and right channels down
         var leftBuffer = mergeBuffers ( leftchannel, recordingLength );

@@ -32,8 +32,10 @@ var frameRate = 24;
 var hdConstraints = {
   video: {
     mandatory: {
-      minWidth: 1280,
-      minHeight: 720
+      minWidth: 640,
+      minHeight: 480
+      //minWidth: 1280,
+      //minHeight: 720
     }
   }
 };
