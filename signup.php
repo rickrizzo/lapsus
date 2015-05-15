@@ -9,7 +9,7 @@
 	$newuser = "INSERT INTO Users (First, Last, email, pass) 
 	VALUES('$First','$Last', '$email', '$pass')"; 
 	$mysqli->query($newuser) or die(mysqli_error($conn)); //the query is executed meaning the values from the sql variables taken from the html form are inserted into the Users table and into corresponding place
-	$conn->exec($newuser); 
+	//$conn->exec($newuser); 
 	//Code below creates a file directory for users
 	/*$usertable = "CREATE TABLE IF NOT EXISTS " . $email . "(
 	`id` int(11) NOT NULL,
