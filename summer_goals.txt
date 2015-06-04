@@ -6,3 +6,5 @@ Goals/ things to accomplish for this summer.
 4.) Start working on a mobile App
 5.) Find organizations to test Lapsus on and arrange for testing during the next academic year
 6.) Think of a new name?
+
+Name Ideas So Far: SpeechMe
