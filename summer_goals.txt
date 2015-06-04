@@ -1,0 +1,8 @@
+Goals/ things to accomplish for this summer.
+
+1.)Update HTML and CSS
+2.) Learn mySQL and PHP (for those who want to understand more about how databases work)
+3.) Possibly find a way to make the speech recognition more accurate
+4.) Start working on a mobile App
+5.) Find organizations to test Lapsus on and arrange for testing during the next academic year
+6.) Think of a new name?
