@@ -2,31 +2,50 @@
 <html>
 	<head>
 		<title>Lapsus Test</title>
+		<style media="screen">
+			body{
+				font-family: sans-serif;
+			}
+		</style>
 	</head>
 	<body>
-		<button id="startButton" onclick="startRecog()">
-			Start
-		</button>
-		<span id="finalSpan"></span>
+		<h1>Lapsus</h1>
+		<h4>A modern tool for presentation</h4>
+
+		<section id="instructions">
+			<h2>Instructions</h2>
+			Find a quiet place and hit start!  The program will transcribe your speach into text
+		</section>
+
+		<section id="buttons">
+			<button id="startButton" onclick="startRecog()">
+				Start
+			</button>
+			<button id="stopButton" onclick="stopRecog()">
+				Stop
+			</button>
+		</section>
+
+		<section id="transcript">
+			<span id="finalSpan"></span>
+			<span id="interimSpan"></span>
+		</section>
 		<script type="text/javascript">
 			if(!(	'webkitSpeechRecognition' in window)) {
 				upgrade();
 			} else {
-				alert("Lez go!");
-
 				//Variables
 				var finalTranscript = "";
 				var recognizing = false;
 				var recognition = new webkitSpeechRecognition();
+				var fillerCount = 0;
 				recognition.continuous = true;
 				recognition.interimResults = true;
 
 				/*Recognition Functions*/
 				//Start Recognition
 				recognition.onstart = function() {
-					recognizing = true;
 					console.log("Speak now!");
-					recognition.start();
 				}
 
 				//Analyse Input
@@ -34,17 +53,34 @@
   				var interimTranscript = "";
   				for(var i = e.resultIndex; i < event.results.length; ++i) {
   						if(e.results[i].isFinal) {
-  							finalTranscript += event.results[i][0].transcript;
+								if(event.results[i][0].confidence < 0.50) {
+									finalTranscript += "<font color='red'>" + event.results[i][0].transcript + "</font>";
+								} else if(event.results[i][0].confidence < 0.80) {
+									finalTranscript += "<font color='green'>" + event.results[i][0].transcript + "</font>";
+								} else if(event.results[i][0].confidence < 0.95) {
+									finalTranscript += "<font color='blue'>" + event.results[i][0].transcript + "</font>";
+								} else {
+									finalTranscript += event.results[i][0].transcript;
+								}
+
+								//console.log(event.results[i][0].confidence + ":" + event.results[i][0].transcript);
   						} else {
   							interimTranscript += event.results[i][0].transcript;
   						}
   						finalSpan.innerHTML = finalTranscript;
+							interimSpan.innerHTML = interimTranscript;
   				}
   			}
 
   			//Handle Errors
   			recognition.onerror = function(e) {
-  				console.log("Error handling still in progress");
+  				if(e.error == 'bad-grammar') {
+						console.log("Error in grammar!");
+					} else if(e.error == "no-speech") {
+						console.log("Paused?");
+					} else if(e.error == "audio-capture") {
+						console.log("Can't hear you!");
+					}
   			}
 
   			//End Recognition
@@ -57,8 +93,12 @@
 
 			/*General Functions*/
 			function startRecog() {
+				recognizing = true;
 				recognition.start();
-				console.log("Ayo we in business");
+			}
+
+			function stopRecog() {
+				recognition.stop();
 			}
 
 			function upgrade() {

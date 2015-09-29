@@ -202,7 +202,7 @@ window.Whammy = (function(){
 							id: 0xa3
 						};
 					}))
-				}
+				};
 
 			//Add cluster to segment
 			segment.data.push(cluster);

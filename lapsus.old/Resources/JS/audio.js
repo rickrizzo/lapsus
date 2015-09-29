@@ -176,7 +176,7 @@ function success(e){
         rightchannel.push (new Float32Array (right));
         recordingLength += bufferSize;
         //console.log('recording');
-    }
+    };
 
     // we connect the recorder
     volume.connect (recorder);
