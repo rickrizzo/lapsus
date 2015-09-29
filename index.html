@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Lapsus Test</title>
+	</head>
+	<body>
+		<button id="startButton" onclick="startRecog()">
+			Start
+		</button>
+		<span id="finalSpan"></span>
+		<script type="text/javascript">
+			if(!(	'webkitSpeechRecognition' in window)) {
+				upgrade();
+			} else {
+				alert("Lez go!");
+
+				//Variables
+				var finalTranscript = "";
+				var recognizing = false;
+				var recognition = new webkitSpeechRecognition();
+				recognition.continuous = true;
+				recognition.interimResults = true;
+
+				/*Recognition Functions*/
+				//Start Recognition
+				recognition.onstart = function() {
+					recognizing = true;
+					console.log("Speak now!");
+					recognition.start();
+				}
+
+				//Analyse Input
+  			recognition.onresult = function(e) {
+  				var interimTranscript = "";
+  				for(var i = e.resultIndex; i < event.results.length; ++i) {
+  						if(e.results[i].isFinal) {
+  							finalTranscript += event.results[i][0].transcript;
+  						} else {
+  							interimTranscript += event.results[i][0].transcript;
+  						}
+  						finalSpan.innerHTML = finalTranscript;
+  				}
+  			}
+
+  			//Handle Errors
+  			recognition.onerror = function(e) {
+  				console.log("Error handling still in progress");
+  			}
+
+  			//End Recognition
+  			recognition.onend = function() {
+  				recognizing = false;
+  				console.log("Finished recording");
+  			}
+
+			}
+
+			/*General Functions*/
+			function startRecog() {
+				recognition.start();
+				console.log("Ayo we in business");
+			}
+
+			function upgrade() {
+				alert("Please upgrade to a modern browser");
+			}
+		</script>
+	</body>
+</html>
