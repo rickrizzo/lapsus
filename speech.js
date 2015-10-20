@@ -26,17 +26,12 @@ if(!(	'webkitSpeechRecognition' in window)) {
 					finalTranscript += "<font color='red'>" + event.results[i][0].transcript + "</font>";
 				} else if(event.results[i][0].confidence < 0.80) {
 					finalTranscript += "<font color='yellow'>" + event.results[i][0].transcript + "</font>";
-				} else if(event.results[i][0].confidence < 0.95) {
-					finalTranscript += "<font color='green'>" + event.results[i][0].transcript + "</font>";
 				} else {
-					finalTranscript += event.results[i][0].transcript;
+					finalTranscript += "<font color='green'>" + event.results[i][0].transcript + "</font>";
 				}
 
-				console.log(event.results[i][0].confidence + " : " + event.results[i][0].transcript);
 			} else {
 				interimTranscript += event.results[i][0].transcript;
-				console.log(event.results[i][0].confidence + " : " + event.results[i][0].transcript);
-
 			}
 			finalSpan.innerHTML = finalTranscript;
 			interimSpan.innerHTML = interimTranscript;
