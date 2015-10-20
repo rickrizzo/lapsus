@@ -1,22 +1,29 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<title>Lapsus Test</title>
-		<style media="screen">
-			body{
-				font-family: sans-serif;
-			}
-		</style>
-	</head>
-	<body>
+<head>
+	<title>Lapsus Test</title>
+	<style media="screen">
+		body{
+			font-family: sans-serif;
+		}
+	</style>
+</head>
+<body>
+	<!--Header-->
+	<header>
 		<h1>Lapsus</h1>
 		<h4>A modern tool for presentation</h4>
+	</header>
 
+	<!--Main-->
+	<main>
+		<!--Instructions-->
 		<section id="instructions">
 			<h2>Instructions</h2>
 			Find a quiet place and hit start!  The program will transcribe your speach into text
 		</section>
 
+		<!--Speech Recognition-->
 		<section id="buttons">
 			<button id="startButton" onclick="startRecog()">
 				Start
@@ -24,86 +31,15 @@
 			<button id="stopButton" onclick="stopRecog()">
 				Stop
 			</button>
+			
+			<section>
+				<span id="finalSpan"></span>
+				<span id="interimSpan"></span>
+			</section>
 		</section>
+	</main>
 
-		<section id="transcript">
-			<span id="finalSpan"></span>
-			<span id="interimSpan"></span>
-		</section>
-		<script type="text/javascript">
-			if(!(	'webkitSpeechRecognition' in window)) {
-				upgrade();
-			} else {
-				//Variables
-				var finalTranscript = "";
-				var recognizing = false;
-				var recognition = new webkitSpeechRecognition();
-				var fillerCount = 0;
-				recognition.continuous = true;
-				recognition.interimResults = true;
-
-				/*Recognition Functions*/
-				//Start Recognition
-				recognition.onstart = function() {
-					console.log("Speak now!");
-				}
-
-				//Analyse Input
-  			recognition.onresult = function(e) {
-  				var interimTranscript = "";
-  				for(var i = e.resultIndex; i < event.results.length; ++i) {
-  						if(e.results[i].isFinal) {
-								if(event.results[i][0].confidence < 0.50) {
-									finalTranscript += "<font color='red'>" + event.results[i][0].transcript + "</font>";
-								} else if(event.results[i][0].confidence < 0.80) {
-									finalTranscript += "<font color='green'>" + event.results[i][0].transcript + "</font>";
-								} else if(event.results[i][0].confidence < 0.95) {
-									finalTranscript += "<font color='blue'>" + event.results[i][0].transcript + "</font>";
-								} else {
-									finalTranscript += event.results[i][0].transcript;
-								}
-
-								//console.log(event.results[i][0].confidence + ":" + event.results[i][0].transcript);
-  						} else {
-  							interimTranscript += event.results[i][0].transcript;
-  						}
-  						finalSpan.innerHTML = finalTranscript;
-							interimSpan.innerHTML = interimTranscript;
-  				}
-  			}
-
-  			//Handle Errors
-  			recognition.onerror = function(e) {
-  				if(e.error == 'bad-grammar') {
-						console.log("Error in grammar!");
-					} else if(e.error == "no-speech") {
-						console.log("Paused?");
-					} else if(e.error == "audio-capture") {
-						console.log("Can't hear you!");
-					}
-  			}
-
-  			//End Recognition
-  			recognition.onend = function() {
-  				recognizing = false;
-  				console.log("Finished recording");
-  			}
-
-			}
-
-			/*General Functions*/
-			function startRecog() {
-				recognizing = true;
-				recognition.start();
-			}
-
-			function stopRecog() {
-				recognition.stop();
-			}
-
-			function upgrade() {
-				alert("Please upgrade to a modern browser");
-			}
-		</script>
-	</body>
+	<!--Scripts-->
+	<script src="speech.js" type="text/javascript"></script>
+</body>
 </html>
