@@ -8,11 +8,5 @@ Lapsus is currently being transfered into a Chrome App. The main goal for this C
 ###_master_
 The most up-to-date working version of Lapsus Chrome App.
 
-###_backend_
-Working on the backend for Lapsus.
-
-###_front end_
-Working on the front end for Lapsus. This is the HTML page for the user to use when speaking into Lapsus to get the text on the screen.
-
-###_lapsus.old_
+###_lapsus-2014_
 This is the original version of Lapsus. In this version you can record yourself speaking (up to 10 minutes) and then watch audio and video seperatly or together to get feedback from peers both online and in person.  We're undergoing some big renovations this semester to get a V1 out!
