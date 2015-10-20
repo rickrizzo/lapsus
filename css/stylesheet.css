@@ -1,0 +1,43 @@
+/* Lapsus Stylesheet */
+
+/*
+  Table of Contents
+
+  * General
+  * Navigation
+  * Main
+  * Transcript
+
+*/
+
+/* General */ 
+body {
+  font-family: Montserrat;
+  margin: 0;
+}
+
+/* Navigation */
+nav h1 {
+  font-size: 3em;
+  line-height: 0.8em;
+  background-color: #03A9F4;
+  padding: 15px;
+  color: white;
+  margin: 0;
+}
+
+/* Main */
+main h2 {
+  font-size: 2em;
+  line-height: 0.2em;
+}
+
+main {
+  text-align: center;
+}
+
+/* Transcript */
+#transcript {
+  border: 1px dashed black;
+  padding: 20px 0;
+}
