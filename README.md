@@ -4,7 +4,7 @@ A presentation application that does more than give you tips. Lapsus captures wh
 
 ##Branches and Their Purpose
 ###_master_
-The most up-to-date working version of Lapsus Chrome App.
+The most up-to-date working version of Lapsus application, currently under active development and refactoring.
 
 ###_lapsus-2014_
-This is the original version of Lapsus. In this version you can record yourself speaking (up to 10 minutes) and then watch audio and video seperatly or together to get feedback from peers both online and in person.  We're undergoing some big renovations this semester to get a V1 out!
+This is the original version of Lapsus. In this version you can record yourself speaking (up to 10 minutes) and then watch audio and video seperatly or together to get feedback from peers both online and in person.  We're undergoing some big renovations this semester to get a v1 out!
