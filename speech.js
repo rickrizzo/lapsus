@@ -6,6 +6,8 @@ if(!(	'webkitSpeechRecognition' in window)) {
 	var recognizing = false;
 	var recognition = new webkitSpeechRecognition();
 	var fillerCount = 0;
+	var timer = 0;
+	var wordspermin = 0;
 	recognition.continuous = true;
 	recognition.interimResults = true;
 
@@ -60,13 +62,20 @@ if(!(	'webkitSpeechRecognition' in window)) {
 /*General Functions*/
 function startRecog() {
 	recognizing = true;
+	var clock = setInterval(incrementsecond, 1000);
 	recognition.start();
 }
 
 function stopRecog() {
+	clearInterval(clock);
 	recognition.stop();
 }
 
 function upgrade() {
 	alert("Please upgrade to a modern browser");
+}
+
+function incrementsecond(){
+	timer++;
+	
 }
