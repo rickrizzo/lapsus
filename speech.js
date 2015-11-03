@@ -1,3 +1,4 @@
+//Speech Recognition
 if(!(	'webkitSpeechRecognition' in window)) {
 	upgrade();
 } else {
@@ -6,6 +7,8 @@ if(!(	'webkitSpeechRecognition' in window)) {
 	var recognizing = false;
 	var recognition = new webkitSpeechRecognition();
 	var fillerCount = 0;
+	var confidenceSum;
+	var confidenceCount = 0;
 	recognition.continuous = true;
 	recognition.interimResults = true;
 
@@ -20,6 +23,9 @@ if(!(	'webkitSpeechRecognition' in window)) {
 		var interimTranscript = "";
 		for(var i = e.resultIndex; i < event.results.length; ++i) {
 			if(e.results[i].isFinal) {
+
+				//confidenceSum = event.results[i][0].confidence;
+				//confidenceCount++;
 				
 				//Evaluate Results
 				if(event.results[i][0].confidence < 0.50) {
@@ -65,6 +71,7 @@ function startRecog() {
 
 function stopRecog() {
 	recognition.stop();
+	//console.log("Confidence Avergage: " + confidenceSum + confidenceCount);
 }
 
 function upgrade() {
