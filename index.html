@@ -17,17 +17,23 @@
 			<section id="instructions">
 				<h2>Instructions</h2>
 				<p>
-					Find a quiet place and hit start!  The program will transcribe your speach into text
+					Find a quiet place and hit start!  The program will transcribe your speech into text
 				</p>
 			</section>
 
 			<!--Controls-->
 			<section id="buttons">
+				<!-- Start running recognition and clock -->
 				<button id="startButton" onclick="startRecog()">
 					Start
 				</button>
+				<!-- Stop running recognition and the clocl -->
 				<button id="stopButton" onclick="stopRecog()">
 					Stop
+				</button>
+				<!-- Resets the clock, does not currently touch recognition -->
+				<button id="resetButton" onclick="resetTimer()">
+					Reset
 				</button>
 			</section>
 
@@ -41,6 +47,11 @@
 			<section id="clock">
 				<p>
 					Timer area
+				</p>
+			</section>
+			<section id="wordcount">
+				<p>
+					Words per minute
 				</p>
 			</section>
 		</main>
