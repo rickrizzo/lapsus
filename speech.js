@@ -41,6 +41,10 @@ if(!(	'webkitSpeechRecognition' in window)) {
 			}
 			finalSpan.innerHTML = finalTranscript;
 			interimSpan.innerHTML = interimTranscript;
+
+			//Word Count
+			console.log("Word Count: " + finalTranscript.replace(/<(?:.|\n)*?>/gm, '').split(" ").length);
+			console.log(finalTranscript.replace(/<(?:.|\n)*?>/gm, '').split(" "));
 		}
 	}
 
