@@ -9,7 +9,7 @@ To run the latest version on your local machine, clone the repository, and call 
 ###_master_
 The most up-to-date working version of Lapsus application, currently under active development and refactoring. Now deployed on Node & Express.
 
-###_pullao
+###_pullao_
 Front end work fresh off the presses from Oscar
 
 ###_lapsus-2014_
