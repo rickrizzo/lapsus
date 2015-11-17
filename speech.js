@@ -9,13 +9,13 @@ if(!(	'webkitSpeechRecognition' in window)) {
 	//Keeps track of the current time
 	var timer = 0;
 	//Variable for number of sections
-	var sections = 2;
+	var sections = 6;
 	//Stores which section we are currently on
 	var currsection = 0;
 	//Stores length of each section
 	var sectionlength;
 	//Variable for length of the speech
-	var speechlength = 60;
+	var speechlength = 120;
 	var totalwords = 0;
 	var wordspermin = 0;
 	//Stores the instance of the clock function when it is running
@@ -109,10 +109,28 @@ function upgrade() {
 	alert("Please upgrade to a modern browser");
 }
 
-function sections(){
-	currsection = Math.floor(timer/sectionlength);
+//Function doing the work for the sections portion of the timing - currently calculates the current section and gives feedback on timing for the current section (like saying how much time is left)
+//In this section). Currently the section values are hard coded.
+function sectioncalc() {
+	//Calculate the current section based on their lengths and the current time. We add one to not start at 0 seconds
+	currsection = Math.floor(timer/sectionlength) + 1;
+	//Calculate the time left till the end of the current section
 	var timeleft = (currsection*sectionlength) - timer;
-	document.getElementByID('section').innerHTML = "Section: " + currsection + " " + timeleft + " seconds left";
+	//If less than 5 seconds left, let the user know to start moving on to the next section
+	if(timeleft <= 5)
+	{
+		document.getElementById('section').innerHTML = "Section " + currsection + " ending in " + timeleft + " seconds, move on to Section " + (currsection+1) + "!"; 
+	}
+	//If the new section has just started, display a "starting section X" message for two seconds
+	else if(timeleft >= (sectionlength - 1))
+	{
+		document.getElementById('section').innerHTML = "Start section " + currsection +"!";
+	}
+	//Otherwise, just show the seconds till next section
+	else
+	{
+		document.getElementById('section').innerHTML = "Section: " + currsection + " --- " + timeleft + " seconds left";
+	}
 }
 
 //Function for doing all of the functions needed every second while the program is running - currently calculating words per min and clock
@@ -146,5 +164,5 @@ function incrementsecond(){
 			document.getElementById('clock').innerHTML = minutes + ":" + seconds;
 		}
 	}
-	sections();
+	sectioncalc();
 }
