@@ -6,14 +6,21 @@ if(!(	'webkitSpeechRecognition' in window)) {
 	var recognizing = false;
 	var recognition = new webkitSpeechRecognition();
 	var fillerCount = 0;
+	//Keeps track of the current time
 	var timer = 0;
-	var seconds = 0;
-	var minutes = 0;
-	var sections = 4;
-	var speechlength = 600;
+	//Variable for number of sections
+	var sections = 2;
+	//Stores which section we are currently on
+	var currsection = 0;
+	//Stores length of each section
+	var sectionlength;
+	//Variable for length of the speech
+	var speechlength = 60;
 	var totalwords = 0;
 	var wordspermin = 0;
+	//Stores the instance of the clock function when it is running
 	var clockfunc;
+	//Marks wether clockfunc is running or not, primarily for preventing multiple instances
 	var clockrunning = false;
 	recognition.continuous = true;
 	recognition.interimResults = true;
@@ -76,6 +83,7 @@ function startRecog() {
 		clockfunc = setInterval(incrementsecond, 1000);
 		//Mark the clock is running
 		clockrunning = true;
+		sectionlength = speechlength/sections;
 	}
 	recognition.start();
 }
@@ -92,8 +100,7 @@ function stopRecog() {
 function resetTimer()
 {
 	//Reset seconds and minutes count
-	seconds = 0;
-	minutes = 0;
+	timer = 0;
 	//Modify the clock back to 00:00
 	document.getElementById('clock').innerHTML = "00:00";
 }
@@ -102,16 +109,20 @@ function upgrade() {
 	alert("Please upgrade to a modern browser");
 }
 
+function sections(){
+	currsection = Math.floor(timer/sectionlength);
+	var timeleft = (currsection*sectionlength) - timer;
+	document.getElementByID('section').innerHTML = "Section: " + currsection + " " + timeleft + " seconds left";
+}
+
 //Function for doing all of the functions needed every second while the program is running - currently calculating words per min and clock
 function incrementsecond(){
-	//Increment the seconds counter
-	seconds++;
-	//Check if seconds > 60, if so add a minute
-	if(seconds >= 60)
-	{
-		seconds = 0;
-		minutes++;
-	}
+	//Increment the timer counter
+	timer++;
+	//Do some math to work out the minutes and seconds
+	var seconds = timer%60;
+	//Need to floor it so the minutes doesn't appear as a giant decimal
+	var minutes = Math.floor(timer/60);
 	//if minutes or seconds is under 10 (aka 1 digit vs 2) we add a 0 on the front to keep the formatting looking right
 	if(seconds < 10)
 	{
@@ -135,18 +146,5 @@ function incrementsecond(){
 			document.getElementById('clock').innerHTML = minutes + ":" + seconds;
 		}
 	}
-	//Trying to extract the total words statistic, currently not functioning
-	totalwords = recognition.SpeechRecognitionResultList.length;
-	//Calculate words per minute
-	wordspermin = totalwords/(minutes+(seconds/60));
-	//Set word/min document to words per mind
-	//document.getElementById('wordcount').innerHTML = "Words per minute: " + totalwords;
-	//console.log(wordspermin);
+	sections();
 }
-
-/*function sectioncalc()
-{
-	var sectionleft;
-	timeleft = speechlength%sections;
-	if(timeleft > speechleft)
-}*/
