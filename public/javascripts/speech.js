@@ -1,4 +1,5 @@
-if(!(	'webkitSpeechRecognition' in window)) {
+//Speech Recognition
+if(!('webkitSpeechRecognition' in window)) {
 	upgrade();
 } else {
 	//Variables
@@ -22,10 +23,11 @@ if(!(	'webkitSpeechRecognition' in window)) {
 	var clockfunc;
 	//Marks wether clockfunc is running or not, primarily for preventing multiple instances
 	var clockrunning = false;
+	var confidenceSum;
+	var confidenceCount = 0;
 	recognition.continuous = true;
 	recognition.interimResults = true;
 
-	/*Recognition Functions*/
 	//Start Recognition
 	recognition.onstart = function() {
 		console.log("Speak now!");
@@ -36,6 +38,8 @@ if(!(	'webkitSpeechRecognition' in window)) {
 		var interimTranscript = "";
 		for(var i = e.resultIndex; i < event.results.length; ++i) {
 			if(e.results[i].isFinal) {
+
+				console.log(e);
 				
 				//Evaluate Results
 				if(event.results[i][0].confidence < 0.50) {
@@ -69,6 +73,9 @@ if(!(	'webkitSpeechRecognition' in window)) {
 	recognition.onend = function() {
 		recognizing = false;
 		console.log("Finished recording");
+		//Word Count
+		console.log("Word Count: " + finalTranscript.replace(/<(?:.|\n)*?>/gm, '').split(" ").length);
+		console.log(finalTranscript.replace(/<(?:.|\n)*?>/gm, '').split(" "));
 	}
 
 }
@@ -94,6 +101,7 @@ function stopRecog() {
 	//Mark the clock is no longer running
 	clockrunning = false;
 	recognition.stop();
+	//console.log("Confidence Avergage: " + confidenceSum + confidenceCount);
 }
 
 //Upon hitting the reset button, resets the timer

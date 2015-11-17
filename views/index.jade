@@ -1,0 +1,17 @@
+extends layout
+
+block content
+  section#instructions
+    h2 Instructions
+    p Find a quiet place and hit start!
+  section#buttons
+    button#startButton(onclick="startRecog()") Start
+    button#stopButton(onclick="stopRecog()") Stop
+  section#transcript
+    span#finalSpan 
+    span#interimSpan
+  section#clock
+    p Timer area
+  section#section
+    p Section 1
+  script(src='/javascripts/speech.js')
