@@ -1,5 +1,5 @@
 //Speech Recognition
-if(!(	'webkitSpeechRecognition' in window)) {
+if(!('webkitSpeechRecognition' in window)) {
 	upgrade();
 } else {
 	//Variables
@@ -12,7 +12,6 @@ if(!(	'webkitSpeechRecognition' in window)) {
 	recognition.continuous = true;
 	recognition.interimResults = true;
 
-	/*Recognition Functions*/
 	//Start Recognition
 	recognition.onstart = function() {
 		console.log("Speak now!");
@@ -24,8 +23,7 @@ if(!(	'webkitSpeechRecognition' in window)) {
 		for(var i = e.resultIndex; i < event.results.length; ++i) {
 			if(e.results[i].isFinal) {
 
-				//confidenceSum = event.results[i][0].confidence;
-				//confidenceCount++;
+				console.log(e);
 				
 				//Evaluate Results
 				if(event.results[i][0].confidence < 0.50) {
@@ -41,10 +39,6 @@ if(!(	'webkitSpeechRecognition' in window)) {
 			}
 			finalSpan.innerHTML = finalTranscript;
 			interimSpan.innerHTML = interimTranscript;
-
-			//Word Count
-			console.log("Word Count: " + finalTranscript.replace(/<(?:.|\n)*?>/gm, '').split(" ").length);
-			console.log(finalTranscript.replace(/<(?:.|\n)*?>/gm, '').split(" "));
 		}
 	}
 
@@ -63,6 +57,9 @@ if(!(	'webkitSpeechRecognition' in window)) {
 	recognition.onend = function() {
 		recognizing = false;
 		console.log("Finished recording");
+		//Word Count
+		console.log("Word Count: " + finalTranscript.replace(/<(?:.|\n)*?>/gm, '').split(" ").length);
+		console.log(finalTranscript.replace(/<(?:.|\n)*?>/gm, '').split(" "));
 	}
 
 }
