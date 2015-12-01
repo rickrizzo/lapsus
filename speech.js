@@ -108,15 +108,12 @@ function resetTimer()
 function settingsWindow()
 {
 	speechlength = parseInt(window.prompt("Total length of speech (In seconds)","360"));
-	if(speechlength == Null)
+	sections = parseInt(window.prompt("Number of sections","60"));
+	if(speechlength === "")
 	{
 		speechlength = 360;
 	}
-	else
-	{
-		sections = parseInt(window.prompt("Number of sections","60"));
-	}
-	if(sections == Null)
+	if(sections === "")
 	{
 		sections = 6;
 	}
