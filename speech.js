@@ -1,5 +1,4 @@
-//Speech Recognition
-if(!('webkitSpeechRecognition' in window)) {
+if(!(	'webkitSpeechRecognition' in window)) {
 	upgrade();
 } else {
 	//Variables
@@ -23,11 +22,10 @@ if(!('webkitSpeechRecognition' in window)) {
 	var clockfunc;
 	//Marks wether clockfunc is running or not, primarily for preventing multiple instances
 	var clockrunning = false;
-	var confidenceSum;
-	var confidenceCount = 0;
 	recognition.continuous = true;
 	recognition.interimResults = true;
 
+	/*Recognition Functions*/
 	//Start Recognition
 	recognition.onstart = function() {
 		console.log("Speak now!");
@@ -38,8 +36,6 @@ if(!('webkitSpeechRecognition' in window)) {
 		var interimTranscript = "";
 		for(var i = e.resultIndex; i < event.results.length; ++i) {
 			if(e.results[i].isFinal) {
-
-				console.log(e);
 				
 				//Evaluate Results
 				if(event.results[i][0].confidence < 0.50) {
@@ -73,9 +69,6 @@ if(!('webkitSpeechRecognition' in window)) {
 	recognition.onend = function() {
 		recognizing = false;
 		console.log("Finished recording");
-		//Word Count
-		console.log("Word Count: " + finalTranscript.replace(/<(?:.|\n)*?>/gm, '').split(" ").length);
-		console.log(finalTranscript.replace(/<(?:.|\n)*?>/gm, '').split(" "));
 	}
 
 }
@@ -101,7 +94,6 @@ function stopRecog() {
 	//Mark the clock is no longer running
 	clockrunning = false;
 	recognition.stop();
-	//console.log("Confidence Avergage: " + confidenceSum + confidenceCount);
 }
 
 //Upon hitting the reset button, resets the timer
@@ -111,6 +103,25 @@ function resetTimer()
 	timer = 0;
 	//Modify the clock back to 00:00
 	document.getElementById('clock').innerHTML = "00:00";
+	document.getElementById('speechsection').innerHTML = "Section: 1";
+}
+
+//Function designed to allow changing of the timing settings, currently utilizes browser prompts in leui of a better method
+function settingsWindow()
+{
+	//Call prompts for speech length and sections
+	speechlength = parseInt(window.prompt("Total length of speech (In seconds)","360"));
+	sections = parseInt(window.prompt("Number of sections","60"));
+	//An attempt to have a default to go back to if an incorrect value is given, currently not functional
+	if(speechlength === undefined)
+	{
+		speechlength = 360;
+	}
+	if(sections === undefined)
+	{
+		sections = 6;
+	}
+	
 }
 
 function upgrade() {
@@ -127,17 +138,17 @@ function sectioncalc() {
 	//If less than 5 seconds left, let the user know to start moving on to the next section
 	if(timeleft <= 5)
 	{
-		document.getElementById('section').innerHTML = "Section " + currsection + " ending in " + timeleft + " seconds, move on to Section " + (currsection+1) + "!"; 
+		document.getElementById('speechsection').innerHTML = "Section " + currsection + " ending in " + timeleft + " seconds, move on to Section " + (currsection+1) + "!"; 
 	}
 	//If the new section has just started, display a "starting section X" message for two seconds
 	else if(timeleft >= (sectionlength - 1))
 	{
-		document.getElementById('section').innerHTML = "Start section " + currsection +"!";
+		document.getElementById('speechsection').innerHTML = "Start section " + currsection +"!";
 	}
 	//Otherwise, just show the seconds till next section
 	else
 	{
-		document.getElementById('section').innerHTML = "Section: " + currsection + " --- " + timeleft + " seconds left";
+		document.getElementById('speechsection').innerHTML = "Section: " + currsection + " --- " + timeleft + " seconds left";
 	}
 }
 
@@ -172,5 +183,6 @@ function incrementsecond(){
 			document.getElementById('clock').innerHTML = minutes + ":" + seconds;
 		}
 	}
+	//Run the section logic
 	sectioncalc();
 }
